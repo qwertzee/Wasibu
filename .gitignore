@@ -1,0 +1,16 @@
+# Database configuration
+config/database.php
+.env
+.env.local
+
+# Database Backups
+*.sql
+*.sql.gz
+
+# Temporary files
+*.log
+.DS_Store
+Thumbs.db
+
+# Database testing
+test-db.php

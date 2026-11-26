@@ -1,0 +1,227 @@
+.wasibu-navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    padding: 0;
+    text-decoration: none;
+}
+
+.wasibu-navbar-logo {
+    display: block;
+    width: auto;
+    height: 150px;
+    max-width: 220px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+
+@media (max-width: 575.98px) {
+    .wasibu-navbar-logo {
+        height: 54px;
+        max-width: min(48vw, 180px);
+    }
+}
+
+.admin-navbar {
+    position: static;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border-bottom: 1px solid rgba(65, 7, 9, 0.13);
+    background: rgba(255, 247, 245, 0.97);
+    box-shadow: 0 3px 16px rgba(65, 7, 9, 0.055);
+}
+
+.admin-navbar-inner {
+    display: flex;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    min-height: 90px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.admin-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    max-height: 86px;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-navbar-logo {
+    display: block;
+    width: 140px;
+    height: 84px;
+    max-width: 150px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+
+.admin-navbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+    min-width: 0;
+}
+
+.admin-navbar .navbar-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(18px, 2.2vw, 32px);
+    min-width: 0;
+    --navbar-indicator-x: 0px;
+    --navbar-indicator-y: 0px;
+    --navbar-indicator-width: 0px;
+}
+
+.admin-navbar .navbar-menu::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--navbar-indicator-width);
+    height: 2px;
+    transform: translate3d(var(--navbar-indicator-x), var(--navbar-indicator-y), 0);
+    border-radius: 2px;
+    background: var(--brand-primary);
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), width 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+}
+
+.admin-navbar .navbar-menu.has-active-indicator::after {
+    opacity: 1;
+}
+
+.admin-navbar .navbar-menu a {
+    position: relative;
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-body);
+    font-size: 0.94rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 340ms ease, font-weight 340ms ease;
+}
+
+.admin-navbar .navbar-menu a:hover,
+.admin-navbar .navbar-menu a:focus-visible {
+    color: var(--brand-primary);
+}
+
+.admin-navbar .navbar-menu a.is-active {
+    color: var(--brand-primary);
+    font-weight: 700;
+}
+
+.admin-navbar .navbar-menu a.indicator-origin {
+    color: var(--brand-primary);
+    font-weight: 700;
+}
+
+.admin-navbar .navbar-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+}
+
+.admin-navbar .navbar-actions .admin-logout-trigger {
+    --bs-btn-color: var(--brand-primary);
+    --bs-btn-border-color: var(--brand-primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--brand-primary);
+    --bs-btn-hover-border-color: var(--brand-primary);
+    --bs-btn-border-radius: 7px;
+    min-height: 40px;
+    padding: 7px 15px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+    .admin-navbar-inner {
+        min-height: 82px;
+        flex-wrap: wrap;
+        gap: 0 18px;
+    }
+
+    .admin-navbar-right {
+        flex: 1 1 auto;
+        justify-content: flex-end;
+        gap: 16px;
+    }
+
+    .admin-navbar-logo {
+        width: 128px;
+        height: 70px;
+    }
+
+    .admin-navbar .navbar-menu {
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .admin-navbar .navbar-menu a {
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .admin-navbar-inner {
+        width: calc(100% - 28px);
+        min-height: 0;
+        padding: 7px 0 10px;
+        gap: 0 10px;
+    }
+
+    .admin-navbar-logo {
+        width: 118px;
+        height: 64px;
+        max-width: 140px;
+    }
+
+    .admin-navbar-right {
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 4px 10px;
+    }
+
+    .admin-navbar .navbar-menu {
+        display: grid;
+        flex: 1 1 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2px 8px;
+        order: 1;
+    }
+
+    .admin-navbar .navbar-menu a {
+        min-height: 36px;
+        justify-content: flex-start;
+        font-size: 0.85rem;
+    }
+
+    .admin-navbar .navbar-actions {
+        order: 2;
+        margin-left: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-navbar .navbar-menu::after,
+    .admin-navbar .navbar-menu a {
+        transition: none;
+    }
+}

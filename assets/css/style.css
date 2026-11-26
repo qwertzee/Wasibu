@@ -1,0 +1,4236 @@
+@import url("logo.css");
+@import url("../vendor/bootstrap-icons/bootstrap-icons.css");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap");
+
+/* =========================================================
+   PALET WARNA WASIBU
+   ========================================================= */
+
+:root {
+    --brand-primary-dark: #410709;
+    --brand-primary: #9D151D;
+    --brand-accent: #DF2C29;
+    --brand-soft-accent: #D95458;
+    --brand-background: #FFF7F5;
+
+    --cream: var(--brand-background);
+    --scarlet: var(--brand-primary);
+    --deep-red: var(--brand-primary-dark);
+    --midnight: var(--brand-primary-dark);
+    --warm-white: var(--brand-background);
+
+    --font-heading: "DM Serif Display", Georgia, serif;
+    --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
+body {
+    background: #f7f7f7;
+    color: #1d1d1d;
+}
+
+
+/* =========================================================
+   HERO / MENU
+   ========================================================= */
+
+.hero-section {
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-form {
+    max-width: 650px;
+}
+
+.search-form .form-control {
+    border-radius: 14px 0 0 14px;
+}
+
+.search-form .btn {
+    border-radius: 0 14px 14px 0;
+}
+
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.category-scroll {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    overflow-x: auto;
+
+    padding: 12px 0;
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.category-scroll .btn {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+   ========================================================= */
+
+.product-card {
+    border: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #ffffff;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+   ========================================================= */
+
+.product-image {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   PRODUCT PLACEHOLDER
+   ========================================================= */
+
+.product-placeholder {
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        #eeeeee,
+        #fafafa
+    );
+    color: #888888;
+}
+
+.placeholder-icon {
+    font-size: 42px;
+}
+
+
+/* =========================================================
+   PRODUCT CATEGORY
+   ========================================================= */
+
+.product-category {
+    font-size: 13px;
+    color: #777777;
+}
+
+
+/* =========================================================
+   PRODUCT DESCRIPTION
+   ========================================================= */
+
+.product-description {
+    color: #707070;
+    font-size: 14px;
+    line-height: 1.5;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PRODUCT PRICE
+   ========================================================= */
+
+.product-price {
+    font-size: 19px;
+    font-weight: 700;
+    color: #111111;
+}
+
+
+/* =========================================================
+   EMPTY MENU
+   ========================================================= */
+
+.empty-menu {
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+
+/* =========================================================
+   PRODUCT DETAIL
+   ========================================================= */
+
+.product-detail-card {
+    max-width: 550px;
+    margin: 0 auto;
+    background: transparent;
+}
+
+.product-detail-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+.product-detail-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #ffffff;
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    color: #777777;
+}
+
+
+/* =========================================================
+   CART
+   ========================================================= */
+
+.cart-product-image {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 16px;
+    flex-shrink: 0;
+}
+
+.cart-product-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 16px;
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   CART QUANTITY
+   ========================================================= */
+
+.cart-qty-button {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cart-quantity {
+    min-width: 35px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   SELLER NOTE
+   ========================================================= */
+
+#seller_note {
+    border-radius: 14px;
+    resize: none;
+}
+
+#seller_note:focus {
+    box-shadow: none;
+    border-color: #212529;
+}
+
+
+/* =========================================================
+   CHECKOUT
+   ========================================================= */
+
+.checkout-card,
+.checkout-summary {
+    border-radius: 22px;
+}
+
+.checkout-card .form-control {
+    border-radius: 14px;
+    font-size: 16px;
+}
+
+.checkout-card .form-control:focus {
+    box-shadow: none;
+    border-color: #212529;
+}
+
+.checkout-summary {
+    position: sticky;
+    top: 100px;
+}
+
+
+/* =========================================================
+   PAYMENT
+   ========================================================= */
+
+.payment-card {
+    border-radius: 24px;
+}
+
+.qris-image {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+
+    border-radius: 18px;
+    border: 1px solid #e5e5e5;
+    padding: 12px;
+}
+
+.qris-placeholder {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
+
+    margin: 0 auto;
+
+    border: 2px dashed #dddddd;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fafafa;
+}
+
+/* =========================================================
+   HOMEPAGE NAVBAR
+   ========================================================= */
+
+.wasibu-home-navbar {
+    background: rgba(255, 250, 243, 0.94);
+    backdrop-filter: blur(8px);
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(103, 25, 31, 0.12);
+    font-family: var(--font-body);
+}
+
+.wasibu-home-navbar .navbar-brand {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 1;
+    color: var(--deep-red);
+}
+
+.wasibu-home-navbar .nav-link {
+    position: relative;
+    padding: 8px 16px;
+    font-weight: 500;
+    color: var(--midnight);
+    transition: color 0.2s ease;
+}
+
+.wasibu-home-navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 0;
+    height: 2px;
+    background: var(--scarlet);
+    transform: translateX(-50%);
+    transition: width 0.2s ease;
+}
+
+.wasibu-home-navbar .nav-link:hover,
+.wasibu-home-navbar .nav-link.active {
+    color: var(--scarlet);
+}
+
+.wasibu-home-navbar .nav-link:hover::after,
+.wasibu-home-navbar .nav-link.active::after {
+    width: 22px;
+}
+
+.wasibu-home-navbar .navbar-toggler {
+    border: 0;
+    padding: 6px;
+}
+
+.wasibu-home-navbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 2px var(--scarlet);
+}
+
+.wasibu-cart-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid rgba(18, 18, 18, 0.18);
+    border-radius: 50%;
+    font-size: 19px;
+    color: var(--midnight);
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.wasibu-cart-btn:hover {
+    background: var(--scarlet);
+    border-color: var(--scarlet);
+    color: var(--cream);
+}
+
+.wasibu-cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--scarlet);
+    color: var(--cream);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.wasibu-cart-btn:hover .wasibu-cart-badge {
+    background: var(--deep-red);
+}
+
+
+/* =========================================================
+   WASIBU HOMEPAGE - HERO SLIDER
+   ========================================================= */
+
+.wasibu-hero {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 460px;
+    overflow: hidden;
+    background: var(--midnight);
+}
+
+.wasibu-hero .carousel,
+.wasibu-hero .carousel-inner,
+.wasibu-hero .carousel-item {
+    width: 100%;
+    height: 100%;
+}
+
+.wasibu-hero .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* overlay gelap supaya teks krem selalu terbaca */
+.wasibu-hero .carousel-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(18, 18, 18, 0.78) 0%,
+        rgba(18, 18, 18, 0.45) 55%,
+        rgba(18, 18, 18, 0.15) 100%
+    );
+    pointer-events: none;
+}
+
+.wasibu-hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.wasibu-hero-text {
+    max-width: 560px;
+    color: var(--cream);
+}
+
+.wasibu-hero-text h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.3rem, 5.5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.wasibu-hero-text p {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 46ch;
+    margin-bottom: 28px;
+    color: rgba(238, 219, 191, 0.92);
+}
+
+.wasibu-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 30px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-decoration: none;
+    pointer-events: auto;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.wasibu-btn-primary {
+    background: var(--scarlet);
+    border-color: var(--scarlet);
+    color: var(--cream);
+}
+
+.wasibu-btn-primary:hover {
+    background: var(--deep-red);
+    border-color: var(--deep-red);
+    color: var(--cream);
+}
+
+.wasibu-btn-outline {
+    border-color: var(--cream);
+    color: var(--cream);
+}
+
+.wasibu-btn-outline:hover {
+    background: var(--cream);
+    color: var(--midnight);
+}
+
+.wasibu-btn:focus-visible {
+    outline: 3px solid var(--cream);
+    outline-offset: 3px;
+}
+
+/* panah kiri-kanan */
+.wasibu-hero .carousel-control-prev,
+.wasibu-hero .carousel-control-next {
+    z-index: 3;
+    top: 50%;
+    bottom: auto;
+    width: 52px;
+    height: 52px;
+    margin: 0 20px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgba(18, 18, 18, 0.45);
+    opacity: 1;
+    transition: background 0.2s ease;
+}
+
+.wasibu-hero .carousel-control-prev:hover,
+.wasibu-hero .carousel-control-next:hover {
+    background: var(--scarlet);
+}
+
+/* dot indikator: yang aktif memanjang */
+.wasibu-hero .carousel-indicators {
+    z-index: 3;
+    margin-bottom: 24px;
+}
+
+.wasibu-hero .carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border: 0;
+    border-radius: 999px;
+    background-color: var(--cream);
+    opacity: 0.5;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.wasibu-hero .carousel-indicators .active {
+    width: 32px;
+    opacity: 1;
+}
+
+
+/* =========================================================
+   EYEBROW LABEL (dipakai di beberapa section)
+   ========================================================= */
+
+.wasibu-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #A3A3A3;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+.wasibu-welcome {
+    background: #FFFFFF;
+    padding: 90px 20px;
+    text-align: center;
+}
+
+.wasibu-welcome h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #171717;
+    margin-bottom: 18px;
+}
+
+.wasibu-welcome p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 17px;
+    color: #737373;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ABOUT CAFE
+   ========================================================= */
+
+.wasibu-about {
+    background: #F5F5F5;
+    padding: 80px 20px;
+}
+
+.wasibu-about h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #171717;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.wasibu-about > .container > .text-center > p {
+    color: #737373;
+}
+
+.wasibu-about-item {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 18px;
+    padding: 32px 20px;
+    height: 100%;
+    text-align: center;
+
+    box-shadow: 0 1px 2px rgba(23, 23, 23, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.wasibu-about-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(23, 23, 23, 0.08);
+}
+
+.wasibu-about-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 56px;
+    height: 56px;
+
+    background: #F5F5F5;
+    border-radius: 50%;
+
+    margin-bottom: 16px;
+}
+
+.wasibu-about-icon i {
+    font-size: 22px;
+    color: #525252;
+}
+
+.wasibu-about-item h5 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #171717;
+    margin-bottom: 6px;
+}
+
+.wasibu-about-item p {
+    margin: 0;
+    color: #737373;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   ORDER CTA
+   ========================================================= */
+
+.wasibu-order-section {
+    background: #FFFFFF;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.wasibu-order-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #171717;
+    margin-bottom: 14px;
+}
+
+.wasibu-order-section p {
+    color: #737373;
+    margin-bottom: 28px;
+}
+
+.wasibu-order-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 14px 34px;
+
+    background: #171717;
+    color: #FFFFFF;
+
+    border-radius: 30px;
+    text-decoration: none;
+
+    font-weight: 600;
+
+    box-shadow: 0 8px 20px rgba(23, 23, 23, 0.15);
+
+    transition: all 0.2s ease;
+}
+
+.wasibu-order-btn:hover {
+    background: #0A0A0A;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(23, 23, 23, 0.2);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.wasibu-footer {
+    background: #171717;
+    color: #FAFAFA;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.wasibu-footer h5 {
+    letter-spacing: 1px;
+}
+
+.wasibu-footer p {
+    margin: 0;
+    color: #A3A3A3;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .wasibu-welcome {
+        padding: 60px 20px;
+    }
+
+    .wasibu-welcome h2 {
+        font-size: 28px;
+    }
+
+    .wasibu-about {
+        padding: 55px 20px;
+    }
+
+    .wasibu-about h2 {
+        font-size: 28px;
+    }
+
+    .wasibu-order-section {
+        padding: 55px 20px;
+    }
+
+    .wasibu-order-section h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .hero-section h1 {
+        font-size: 30px;
+    }
+
+    .product-image,
+    .product-placeholder {
+        height: 190px;
+    }
+}
+
+/* =========================================================
+   DAFTAR MENU / KATALOG
+   ========================================================= */
+
+.wasibu-menu-page {
+    font-family: var(--font-body);
+    background: var(--warm-white);
+    color: var(--midnight);
+}
+
+
+/* HEADER */
+
+.wasibu-menu-header {
+    padding: 56px 0 44px;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(103, 25, 31, 0.1);
+}
+
+.wasibu-menu-header h1 {
+    margin: 0 0 14px;
+    font-family: var(--font-heading);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--deep-red);
+}
+
+.wasibu-menu-header p {
+    max-width: 650px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(18, 18, 18, 0.72);
+}
+
+
+/* AREA UTAMA */
+
+.wasibu-menu-main {
+    padding-top: 36px;
+    padding-bottom: 70px;
+}
+
+
+/* FILTER KATEGORI */
+
+.wasibu-menu-page .category-scroll {
+    gap: 10px;
+    padding-top: 0;
+    padding-bottom: 12px;
+}
+
+.wasibu-category-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+
+    min-height: 44px;
+    padding: 10px 20px;
+
+    border: 1.5px solid var(--scarlet);
+    border-radius: 999px;
+
+    background: transparent;
+    color: var(--scarlet);
+
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.wasibu-category-pill:hover,
+.wasibu-category-pill.active {
+    background: var(--scarlet);
+    border-color: var(--scarlet);
+    color: var(--cream);
+}
+
+.wasibu-category-pill:hover {
+    transform: translateY(-1px);
+}
+
+
+/* JUDUL DAFTAR PRODUK */
+
+.wasibu-menu-page main h2 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 400;
+    color: var(--deep-red);
+}
+
+.wasibu-menu-count {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 13px;
+    border-radius: 999px;
+
+    background: rgba(171, 49, 48, 0.08);
+    color: var(--scarlet);
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* KARTU PRODUK */
+
+.wasibu-menu-page .product-card {
+    border: 1px solid rgba(103, 25, 31, 0.08);
+    background: #ffffff;
+}
+
+.wasibu-menu-page .product-card .card-title {
+    margin-bottom: 10px;
+
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 400;
+    line-height: 1.25;
+
+    color: var(--midnight);
+}
+
+.wasibu-menu-page .product-category {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--scarlet);
+}
+
+.wasibu-menu-page .product-description {
+    margin-bottom: 18px;
+
+    font-size: 16px;
+    line-height: 1.55;
+
+    color: rgba(18, 18, 18, 0.68);
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    overflow: hidden;
+}
+
+.wasibu-menu-page .product-price {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--scarlet);
+}
+
+
+/* MENU KOSONG */
+
+.wasibu-menu-empty {
+    padding: 60px 24px;
+
+    border: 1px solid rgba(103, 25, 31, 0.1);
+    border-radius: 24px;
+
+    background: var(--cream);
+}
+
+.wasibu-menu-empty h3 {
+    margin-bottom: 10px;
+
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400;
+
+    color: var(--deep-red);
+}
+
+.wasibu-menu-empty p {
+    max-width: 560px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: rgba(18, 18, 18, 0.7);
+}
+
+
+/* CTA BAWAH */
+
+.wasibu-menu-page .wasibu-order-section {
+    background: var(--cream);
+}
+
+.wasibu-menu-page .wasibu-order-section .wasibu-eyebrow {
+    color: var(--scarlet);
+    opacity: 1;
+}
+
+.wasibu-menu-page .wasibu-order-section h2 {
+    color: var(--deep-red);
+}
+
+.wasibu-menu-page .wasibu-order-section p {
+    max-width: 620px;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 28px;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: rgba(18, 18, 18, 0.7);
+}
+
+
+/* TABLET */
+
+@media (max-width: 991.98px) {
+
+    .wasibu-menu-header {
+        padding: 48px 0 38px;
+    }
+
+    .wasibu-menu-main {
+        padding-top: 30px;
+        padding-bottom: 60px;
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 575.98px) {
+
+    .wasibu-menu-header {
+        padding: 38px 0 32px;
+    }
+
+    .wasibu-menu-header h1 {
+        font-size: 2.35rem;
+    }
+
+    .wasibu-menu-header .wasibu-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .wasibu-menu-main {
+        padding-top: 24px;
+        padding-bottom: 50px;
+    }
+
+    .wasibu-category-pill {
+        min-height: 42px;
+        padding: 9px 16px;
+    }
+
+    .wasibu-menu-page .product-image,
+    .wasibu-menu-page .product-placeholder {
+        height: 160px;
+    }
+
+    .wasibu-menu-page .product-card .card-body {
+        padding: 14px;
+    }
+
+    .wasibu-menu-page .product-card .card-title {
+        font-size: 1.1rem;
+    }
+
+    .wasibu-menu-page .product-category,
+    .wasibu-menu-page .product-description {
+        font-size: 16px;
+    }
+
+    .wasibu-menu-page .product-price {
+        font-size: 18px;
+    }
+
+    .wasibu-menu-empty {
+        padding: 45px 20px;
+    }
+
+}
+
+/* =========================================================
+   HERO - MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .wasibu-hero {
+        height: 50vh;
+        min-height: 420px;
+    }
+
+    .wasibu-hero .carousel-item::after {
+        background: rgba(18, 18, 18, 0.6);
+    }
+
+    .wasibu-hero .carousel-control-prev,
+    .wasibu-hero .carousel-control-next {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wasibu-hero .carousel-item,
+    .wasibu-btn,
+    .wasibu-cart-btn {
+        transition: none;
+    }
+}
+
+
+/* =========================================================
+   TAHAP 2 - WARNA SELURUH WEBSITE (menimpa aturan lama di atas)
+   ========================================================= */
+
+body {
+    background: var(--warm-white);
+    color: var(--midnight);
+    font-family: var(--font-body);
+}
+
+/* tombol Bootstrap dipakai di semua halaman (menu, cart, checkout, dll) */
+.btn-dark {
+    --bs-btn-bg: var(--scarlet);
+    --bs-btn-border-color: var(--scarlet);
+    --bs-btn-color: var(--cream);
+    --bs-btn-hover-bg: var(--deep-red);
+    --bs-btn-hover-border-color: var(--deep-red);
+    --bs-btn-hover-color: var(--cream);
+    --bs-btn-active-bg: var(--deep-red);
+    --bs-btn-active-border-color: var(--deep-red);
+    --bs-btn-active-color: var(--cream);
+    --bs-btn-disabled-bg: var(--scarlet);
+    --bs-btn-disabled-border-color: var(--scarlet);
+}
+
+.btn-outline-dark {
+    --bs-btn-color: var(--scarlet);
+    --bs-btn-border-color: var(--scarlet);
+    --bs-btn-hover-bg: var(--scarlet);
+    --bs-btn-hover-border-color: var(--scarlet);
+    --bs-btn-hover-color: var(--cream);
+    --bs-btn-active-bg: var(--deep-red);
+    --bs-btn-active-border-color: var(--deep-red);
+    --bs-btn-active-color: var(--cream);
+}
+
+.btn {
+    transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.btn:focus-visible {
+    outline: 3px solid rgba(223, 44, 41, 0.28);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+.btn-dark:hover,
+.btn-outline-dark:hover {
+    transform: translateY(-1px);
+}
+
+.admin-shell {
+    min-height: 100vh;
+    background: var(--brand-background);
+    color: var(--brand-primary-dark);
+    font-family: var(--font-body);
+    --admin-sidebar-width: 260px;
+}
+
+.admin-shell main.container {
+    width: calc(100% - var(--admin-sidebar-width) - 48px);
+    max-width: 1200px;
+    margin-right: 24px;
+    margin-left: calc(var(--admin-sidebar-width) + 24px);
+    padding: 28px 0 44px !important;
+}
+
+.admin-shell.admin-sidebar-collapsed {
+    --admin-sidebar-width: 76px;
+}
+
+.admin-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1040;
+    display: flex;
+    width: var(--admin-sidebar-width);
+    flex-direction: column;
+    gap: 20px;
+    padding: 18px 12px;
+    border-right: 1px solid rgba(65, 7, 9, 0.12);
+    background: #fffaf8;
+    box-shadow: 5px 0 22px rgba(65, 7, 9, 0.045);
+    transition: width 180ms ease;
+}
+
+.admin-sidebar-top {
+    display: flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.admin-sidebar-brand {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-sidebar-brand .admin-navbar-logo {
+    display: block;
+    width: 100%;
+    max-width: 178px;
+    height: auto;
+    max-height: 52px;
+    object-fit: contain;
+}
+
+.admin-sidebar-toggle {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(65, 7, 9, 0.14);
+    border-radius: 9px;
+    background: #fff;
+    color: var(--brand-primary-dark);
+    font-size: 1.15rem;
+}
+
+.admin-sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-sidebar-menu a,
+.admin-sidebar-logout {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 46px;
+    align-items: center;
+    gap: 13px;
+    padding: 0 13px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #56393a;
+    font: 600 0.94rem var(--font-body);
+    text-align: left;
+    text-decoration: none;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+.admin-sidebar-menu a > i,
+.admin-sidebar-logout > i {
+    display: inline-flex;
+    width: 24px;
+    flex: 0 0 24px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.18rem;
+}
+
+.admin-sidebar-menu a:hover,
+.admin-sidebar-menu a:focus-visible,
+.admin-sidebar-logout:hover,
+.admin-sidebar-logout:focus-visible {
+    background: #f9eee9;
+    color: var(--brand-primary);
+}
+
+.admin-sidebar-menu a.is-active {
+    background: #f3e1d8;
+    color: var(--brand-primary-dark);
+    font-weight: 700;
+}
+
+.admin-sidebar-menu a.is-active > i {
+    color: var(--brand-primary);
+}
+
+.admin-sidebar-menu a:focus-visible,
+.admin-sidebar-toggle:focus-visible,
+.admin-sidebar-logout:focus-visible {
+    outline: 3px solid rgba(157, 21, 29, 0.24);
+    outline-offset: 2px;
+}
+
+.admin-sidebar-footer {
+    margin-top: auto;
+}
+
+.admin-sidebar-logout {
+    cursor: pointer;
+}
+
+.admin-sidebar-collapsed .admin-sidebar {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.admin-sidebar-collapsed .admin-sidebar-top {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-sidebar-collapsed .admin-sidebar-brand .admin-navbar-logo {
+    width: 42px;
+    max-height: 40px;
+}
+
+.admin-sidebar-collapsed .admin-sidebar-menu a,
+.admin-sidebar-collapsed .admin-sidebar-logout {
+    justify-content: center;
+    padding: 0;
+}
+
+.admin-sidebar-collapsed [data-sidebar-label] {
+    display: none;
+}
+
+.admin-sidebar-collapsed [data-tooltip]:hover::after,
+.admin-sidebar-collapsed [data-tooltip]:focus-visible::after {
+    position: absolute;
+    z-index: 1050;
+    top: 50%;
+    left: calc(100% + 10px);
+    transform: translateY(-50%);
+    padding: 7px 10px;
+    border-radius: 7px;
+    background: var(--brand-primary-dark);
+    color: #fff;
+    content: attr(data-tooltip);
+    font: 600 0.82rem var(--font-body);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.admin-shell .btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.finance-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.finance-chart-row {
+    display: grid;
+    grid-template-columns: minmax(56px, 82px) minmax(48px, 1fr) minmax(108px, auto);
+    align-items: center;
+    gap: 10px;
+    color: #76585a;
+    font-size: 0.84rem;
+}
+
+.finance-chart-row > strong {
+    color: var(--brand-primary-dark);
+    font-size: 0.8rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.finance-chart-track {
+    height: 10px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #f2dcda;
+}
+
+.finance-chart-bar {
+    height: 100%;
+    min-width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-soft-accent));
+}
+
+@media (max-width: 575.98px) {
+    .finance-chart-row {
+        grid-template-columns: 44px minmax(36px, 1fr) minmax(88px, auto);
+        gap: 7px;
+        font-size: 0.74rem;
+    }
+
+    .finance-chart-row > strong {
+        font-size: 0.7rem;
+    }
+}
+
+@media print {
+    .admin-sidebar,
+    .finance-print-button,
+    .finance-filter {
+        display: none !important;
+    }
+
+    .admin-shell main.container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0 !important;
+    }
+
+    .admin-finance-report .card {
+        break-inside: avoid;
+        box-shadow: none !important;
+    }
+}
+
+.admin-navbar-user .admin-logout-trigger {
+    border: 1px solid var(--brand-primary);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--brand-primary);
+    padding: 7px 13px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.admin-navbar-user .admin-logout-trigger:hover,
+.admin-navbar-user .admin-logout-trigger:focus-visible {
+    background: var(--brand-primary);
+    color: #fff;
+}
+
+.admin-logout-dialog {
+    width: min(440px, calc(100% - 32px));
+    max-width: none;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(65, 7, 9, 0.12);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--brand-primary-dark);
+    box-shadow: 0 24px 80px rgba(65, 7, 9, 0.2);
+}
+
+.admin-logout-dialog::backdrop {
+    background: rgba(35, 10, 11, 0.42);
+    backdrop-filter: blur(3px);
+}
+
+.admin-logout-card {
+    padding: 28px;
+    background: #fff;
+    font-family: var(--font-body);
+}
+
+.admin-logout-card h2 {
+    margin: 0;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-heading);
+    font-size: 1.55rem;
+    font-weight: 400;
+}
+
+.admin-logout-card p {
+    margin: 10px 0 24px;
+    color: #76585a;
+    font-size: 0.98rem;
+}
+
+.admin-logout-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.admin-logout-cancel,
+.admin-logout-confirm {
+    min-width: 104px;
+    border-radius: 7px;
+    padding: 8px 15px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+}
+
+.admin-logout-cancel {
+    border: 1px solid rgba(65, 7, 9, 0.2);
+    background: #fff;
+    color: var(--brand-primary-dark);
+}
+
+.admin-logout-cancel:hover {
+    background: #fff7f5;
+}
+
+.admin-logout-confirm {
+    border: 1px solid var(--brand-primary);
+    background: var(--brand-primary);
+    color: #fff;
+}
+
+.admin-logout-confirm:hover {
+    border-color: var(--brand-primary-dark);
+    background: var(--brand-primary-dark);
+    color: #fff;
+}
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow-x: hidden;
+    background: var(--brand-background);
+    color: var(--brand-primary-dark);
+    font-family: var(--font-body);
+}
+
+.login-page main.login-layout {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0 !important;
+}
+
+.login-page .login-row {
+    width: 100%;
+    min-height: 0 !important;
+    justify-content: center;
+    margin: 0;
+}
+
+.login-page .login-column {
+    flex: 0 1 420px;
+    width: 100%;
+    max-width: 420px;
+    padding: 0;
+}
+
+.login-page .login-card {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(65, 7, 9, 0.09) !important;
+    border-radius: 20px !important;
+    background: #fff;
+    box-shadow: 0 16px 48px rgba(65, 7, 9, 0.11) !important;
+}
+
+.login-page .login-card .card-body {
+    width: 100%;
+    padding: 34px 36px;
+}
+
+.login-page .login-logo {
+    display: block;
+    width: auto;
+    height: 132px;
+    max-width: 210px;
+    margin: 0 auto 12px;
+    object-fit: contain;
+}
+
+.login-page .login-card h2,
+.login-page .login-card p,
+.login-page .login-card label {
+    max-width: 100%;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+    writing-mode: horizontal-tb;
+}
+
+.login-page .login-title {
+    margin: 0 0 4px;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.login-page .login-form {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.login-page .login-form > div,
+.login-page .login-form .form-label,
+.login-page .login-form .form-control,
+.login-page .login-form .btn {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.login-page .login-form .form-label {
+    color: var(--brand-primary-dark);
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.login-page .login-form .form-control {
+    display: block;
+    height: 45px;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.4;
+    word-break: normal;
+}
+
+.login-page .login-form .form-control:focus {
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 0.2rem rgba(157, 21, 29, 0.13);
+}
+
+.login-page .login-form .btn {
+    display: flex;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 0 !important;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: normal;
+    word-break: normal;
+}
+
+@media (max-width: 575.98px) {
+    .login-page {
+        padding: 18px;
+    }
+
+    .login-page .login-card .card-body {
+        padding: 28px 24px;
+    }
+
+    .login-page .login-logo {
+        height: 120px;
+        max-width: 190px;
+    }
+}
+
+.admin-reports .reports-page-heading > div > div {
+    color: var(--brand-primary-dark);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.admin-reports .reports-page-heading {
+    margin-top: 11px;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400 !important;
+}
+
+.admin-reports .reports-period {
+    margin-top: 4px;
+    color: #76585a;
+    font-size: 0.92rem;
+}
+
+.admin-reports .reports-page-heading h2 {
+    margin-top: 9px;
+}
+
+.admin-dashboard {
+    min-height: 100vh;
+    background: var(--brand-background);
+    color: var(--brand-primary-dark);
+}
+
+.admin-dashboard main.container {
+    max-width: 1200px;
+    padding-top: 32px !important;
+    padding-bottom: 44px !important;
+}
+
+.admin-dashboard main.container > div:first-child {
+    margin-bottom: 28px !important;
+    padding: 0 0 16px;
+    border: 0;
+    border-bottom: 1px solid rgba(65, 7, 9, 0.12);
+    border-radius: 0;
+    background: transparent;
+}
+
+.admin-dashboard main.container > div:first-child h2 {
+    color: var(--brand-primary-dark);
+    font-family: var(--font-heading);
+    font-size: 1.9rem;
+    font-weight: 400 !important;
+    line-height: 1.2;
+}
+
+.admin-dashboard .dashboard-page-heading p {
+    margin-top: 5px;
+    color: #76585a !important;
+    font-size: 0.9rem;
+}
+
+.admin-dashboard .card,
+.admin-dashboard .card h3,
+.admin-dashboard .card h4,
+.admin-dashboard .admin-stat-number,
+.admin-dashboard .admin-table {
+    font-family: var(--font-body);
+}
+
+.admin-dashboard .dashboard-stat-grid {
+    row-gap: 12px;
+    column-gap: 0;
+}
+
+.admin-dashboard .admin-stat-card,
+.admin-dashboard .admin-order-card,
+.admin-dashboard .dashboard-chart-card {
+    border: 1px solid rgba(65, 7, 9, 0.09) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.91);
+    box-shadow: 0 5px 18px rgba(65, 7, 9, 0.055) !important;
+}
+
+.admin-dashboard .admin-stat-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease;
+}
+
+.admin-dashboard .admin-stat-card::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--brand-primary);
+    content: "";
+}
+
+.admin-dashboard .dashboard-stat-grid > [class*="col-"]:nth-child(4n + 2) .admin-stat-card::before {
+    background: var(--brand-accent);
+}
+
+.admin-dashboard .dashboard-stat-grid > [class*="col-"]:nth-child(4n + 3) .admin-stat-card::before {
+    background: var(--brand-soft-accent);
+}
+
+.admin-dashboard .dashboard-stat-grid > [class*="col-"]:nth-child(4n) .admin-stat-card::before {
+    background: var(--brand-primary-dark);
+}
+
+.admin-dashboard .admin-stat-card:hover,
+.admin-dashboard .admin-order-card:hover,
+.admin-dashboard .dashboard-chart-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(157, 21, 29, 0.2) !important;
+    box-shadow: 0 10px 24px rgba(65, 7, 9, 0.095) !important;
+}
+
+.admin-dashboard .admin-stat-card .card-body {
+    padding: 22px 20px 21px 24px !important;
+}
+
+.admin-dashboard .admin-stat-card .text-secondary {
+    color: #76585a !important;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.admin-dashboard .admin-stat-number {
+    color: var(--brand-primary-dark);
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.admin-dashboard .dashboard-section,
+.admin-dashboard .dashboard-stat-grid {
+    margin-bottom: 24px !important;
+}
+
+.admin-dashboard .dashboard-chart-card h3,
+.admin-dashboard .admin-order-card h4 {
+    color: var(--brand-primary-dark);
+    font-family: var(--font-body);
+    font-weight: 600 !important;
+}
+
+.admin-dashboard .dashboard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    padding: 0 0 14px;
+    border-bottom: 1px solid rgba(65, 7, 9, 0.13);
+    margin-bottom: 24px;
+}
+
+.admin-dashboard .dashboard-actions .btn {
+    min-height: 42px;
+    padding-inline: 19px;
+    font-weight: 600;
+}
+
+.admin-dashboard .dashboard-chart-card {
+    overflow: hidden;
+    transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease;
+}
+
+.admin-dashboard .dashboard-chart-card .card-body {
+    min-height: 0;
+    padding: 17px !important;
+}
+
+.admin-dashboard .dashboard-chart-list {
+    gap: 6px;
+}
+
+.admin-dashboard .dashboard-chart-row {
+    grid-template-columns: 48px minmax(0, 1fr) minmax(94px, auto);
+    gap: 9px;
+    min-height: 22px;
+}
+
+.admin-dashboard .dashboard-chart-track {
+    height: 9px;
+    background: #f2dcda;
+}
+
+.admin-dashboard .dashboard-chart-bar {
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-soft-accent));
+}
+
+.admin-dashboard .dashboard-chart-value {
+    color: var(--brand-primary-dark);
+    font-size: 0.84rem;
+}
+
+.admin-dashboard .admin-order-card .card-body {
+    padding: 20px !important;
+}
+
+.admin-dashboard .admin-table {
+    --bs-table-bg: transparent;
+    --bs-table-border-color: rgba(65, 7, 9, 0.09);
+    margin-bottom: 0;
+}
+
+.admin-dashboard .admin-table thead th {
+    padding: 10px 10px;
+    background: #fff0ed;
+    color: var(--brand-primary-dark);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.admin-dashboard .admin-table tbody td {
+    padding: 9px 10px;
+    color: #382729;
+    font-size: 0.92rem;
+}
+
+.admin-dashboard .admin-table tbody tr:hover > * {
+    background: rgba(255, 240, 237, 0.72);
+}
+
+.admin-dashboard .dashboard-data-table th,
+.admin-dashboard .dashboard-data-table td {
+    padding: 10px 9px;
+}
+
+.admin-dashboard .dashboard-order-table {
+    width: 100%;
+    min-width: 820px;
+    table-layout: fixed;
+}
+
+.admin-dashboard .dashboard-order-table th:first-child,
+.admin-dashboard .dashboard-order-table td:first-child {
+    width: 16%;
+}
+
+.admin-dashboard .dashboard-order-table strong {
+    display: inline-block;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
+}
+
+@media (max-width: 991.98px) {
+    .admin-dashboard .dashboard-chart-card .card-body {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .admin-dashboard main.container {
+        padding-top: 24px !important;
+    }
+
+    .admin-dashboard .dashboard-chart-card .card-body,
+    .admin-dashboard .admin-order-card .card-body {
+        padding: 19px !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .admin-dashboard main.container {
+        padding-inline: 14px;
+    }
+
+    .admin-dashboard main.container > div:first-child {
+        padding: 0 0 13px;
+    }
+
+    .admin-dashboard main.container > div:first-child h2 {
+        font-size: 1.65rem;
+    }
+
+    .admin-dashboard .admin-stat-card .card-body {
+        min-height: 112px;
+        padding: 16px 13px 16px 18px !important;
+    }
+
+    .admin-dashboard .admin-stat-number {
+        font-size: 1.65rem;
+    }
+
+    .admin-dashboard .dashboard-chart-row {
+        grid-template-columns: 38px minmax(24px, 1fr) minmax(78px, auto);
+        gap: 8px;
+    }
+
+    .admin-dashboard .dashboard-chart-value {
+        font-size: 0.75rem;
+    }
+
+    .admin-dashboard .admin-stat-number {
+        font-size: 1.6rem;
+    }
+
+    .admin-dashboard .dashboard-actions > a {
+        flex: 1 1 140px;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-dashboard .admin-stat-card,
+    .admin-dashboard .admin-order-card,
+    .admin-dashboard .dashboard-chart-card,
+    .btn {
+        transition: none;
+    }
+}
+
+.product-price {
+    color: var(--scarlet);
+}
+
+#seller_note:focus,
+.checkout-card .form-control:focus {
+    border-color: var(--scarlet);
+}
+
+/* judul dan teks section beranda */
+.wasibu-welcome h2,
+.wasibu-about h2,
+.wasibu-order-section h2 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    color: var(--deep-red);
+}
+
+.wasibu-welcome p,
+.wasibu-about > .container > .text-center > p,
+.wasibu-about-item p {
+    color: rgba(18, 18, 18, 0.72);
+}
+
+.wasibu-eyebrow {
+    color: var(--scarlet);
+}
+
+/* Tentang kami: putih hangat */
+.wasibu-welcome {
+    background: var(--warm-white);
+}
+
+/* Info kafe: latar krem, kartu putih hangat */
+.wasibu-about {
+    background: var(--cream);
+}
+
+.wasibu-about-item {
+    background: var(--warm-white);
+    border-color: rgba(103, 25, 31, 0.12);
+}
+
+.wasibu-about-item h5 {
+    color: var(--midnight);
+}
+
+.wasibu-about-icon {
+    background: var(--cream);
+}
+
+.wasibu-about-icon i {
+    color: var(--scarlet);
+}
+
+/* Ajakan pesan: blok merah tua sebagai penutup halaman */
+.wasibu-order-section {
+    background: var(--deep-red);
+}
+
+.wasibu-order-section h2 {
+    color: var(--cream);
+}
+
+.wasibu-order-section p {
+    color: rgba(238, 219, 191, 0.85);
+}
+
+.wasibu-order-section .wasibu-eyebrow {
+    color: var(--cream);
+    opacity: 0.8;
+}
+
+.wasibu-order-btn {
+    background: var(--cream);
+    color: var(--deep-red);
+    box-shadow: none;
+}
+
+.wasibu-order-btn:hover {
+    background: var(--warm-white);
+    color: var(--scarlet);
+    box-shadow: none;
+}
+
+/* Footer */
+.wasibu-footer {
+    background: var(--midnight);
+    color: var(--cream);
+}
+
+.wasibu-footer h5 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 26px;
+}
+
+.wasibu-footer p {
+    color: rgba(238, 219, 191, 0.7);
+}
+/* TESTIMONI */
+
+<section class="wasibu-testimonials">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="wasibu-eyebrow">
+                Kata Mereka
+            </span>
+
+            <h2>
+                Cerita dari Pengunjung Wasibu
+            </h2>
+
+            <p>
+                Beberapa kesan dari pengunjung yang menikmati
+                makanan dan suasana di Wasibu Cafe.
+            </p>
+
+        </div>
+
+
+        <div
+            id="testimonialCarousel"
+            class="carousel slide"
+            data-bs-ride="carousel"
+            data-bs-interval="6000"
+        >
+
+            <div class="carousel-inner">
+
+
+                <!-- ================================================= -->
+                <!-- SLIDE 1 -->
+                <!-- ================================================= -->
+
+                <div class="carousel-item active">
+
+                    <div class="row g-4">
+
+
+                        <!-- Testimoni 1 -->
+
+                        <div class="col-md-4">
+
+                            <div class="wasibu-testimonial-card h-100">
+
+                                <div class="wasibu-testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+
+                                <p class="wasibu-testimonial-text">
+                                    “Tempatnya nyaman banget buat nongkrong.
+                                    Makanannya juga enak dan pilihan menunya banyak.”
+                                </p>
+
+                                <div class="wasibu-testimonial-user">
+
+                                    <div class="wasibu-testimonial-avatar">
+                                        A
+                                    </div>
+
+                                    <div>
+                                        <strong>Andini</strong>
+                                        <span>Pelanggan Wasibu</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Testimoni 2 -->
+
+                        <div class="col-md-4">
+
+                            <div class="wasibu-testimonial-card h-100">
+
+                                <div class="wasibu-testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+
+                                <p class="wasibu-testimonial-text">
+                                    “Cocok banget buat nugas sambil ngopi.
+                                    Suasananya tenang dan pelayanannya juga ramah.”
+                                </p>
+
+                                <div class="wasibu-testimonial-user">
+
+                                    <div class="wasibu-testimonial-avatar">
+                                        R
+                                    </div>
+
+                                    <div>
+                                        <strong>Raka</strong>
+                                        <span>Pelanggan Wasibu</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Testimoni 3 -->
+
+                        <div class="col-md-4">
+
+                            <div class="wasibu-testimonial-card h-100">
+
+                                <div class="wasibu-testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+
+                                <p class="wasibu-testimonial-text">
+                                    “Pesan makanannya gampang dan nggak ribet.
+                                    Bakal balik lagi buat cobain menu lainnya.”
+                                </p>
+
+                                <div class="wasibu-testimonial-user">
+
+                                    <div class="wasibu-testimonial-avatar">
+                                        N
+                                    </div>
+
+                                    <div>
+                                        <strong>Nabila</strong>
+                                        <span>Pelanggan Wasibu</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- SLIDE 2 -->
+                <!-- ================================================= -->
+
+                <div class="carousel-item">
+
+                    <div class="row g-4">
+
+
+                        <!-- Testimoni 4 -->
+
+                        <div class="col-md-4">
+
+                            <div class="wasibu-testimonial-card h-100">
+
+                                <div class="wasibu-testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+
+                                <p class="wasibu-testimonial-text">
+                                    “Tempatnya cozy dan cocok buat kumpul bareng teman.
+                                    Pilihan makanannya juga beragam.”
+                                </p>
+
+                                <div class="wasibu-testimonial-user">
+
+                                    <div class="wasibu-testimonial-avatar">
+                                        D
+                                    </div>
+
+                                    <div>
+                                        <strong>Dimas</strong>
+                                        <span>Pelanggan Wasibu</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Testimoni 5 -->
+
+                        <div class="col-md-4">
+
+                            <div class="wasibu-testimonial-card h-100">
+
+                                <div class="wasibu-testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+
+                                <p class="wasibu-testimonial-text">
+                                    “Minumannya enak dan suasananya nyaman.
+                                    Enak juga kalau mau ngobrol lama sama teman.”
+                                </p>
+
+                                <div class="wasibu-testimonial-user">
+
+                                    <div class="wasibu-testimonial-avatar">
+                                        S
+                                    </div>
+
+                                    <div>
+                                        <strong>Salsabila</strong>
+                                        <span>Pelanggan Wasibu</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Testimoni 6 -->
+
+                        <div class="col-md-4">
+
+                            <div class="wasibu-testimonial-card h-100">
+
+                                <div class="wasibu-testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+
+                                <p class="wasibu-testimonial-text">
+                                    “Pelayanannya cepat, makanannya enak,
+                                    dan tempatnya bikin betah buat santai.”
+                                </p>
+
+                                <div class="wasibu-testimonial-user">
+
+                                    <div class="wasibu-testimonial-avatar">
+                                        F
+                                    </div>
+
+                                    <div>
+                                        <strong>Fajar</strong>
+                                        <span>Pelanggan Wasibu</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Tombol Previous -->
+
+            <button
+                class="carousel-control-prev wasibu-testimonial-control wasibu-testimonial-prev"
+                type="button"
+                data-bs-target="#testimonialCarousel"
+                data-bs-slide="prev"
+                aria-label="Testimoni sebelumnya"
+            >
+
+                <i class="bi bi-chevron-left"></i>
+
+            </button>
+
+
+            <!-- Tombol Next -->
+
+            <button
+                class="carousel-control-next wasibu-testimonial-control wasibu-testimonial-next"
+                type="button"
+                data-bs-target="#testimonialCarousel"
+                data-bs-slide="next"
+                aria-label="Testimoni berikutnya"
+            >
+
+                <i class="bi bi-chevron-right"></i>
+
+            </button>
+
+
+            <!-- Indicator -->
+
+            <div class="wasibu-testimonial-indicators">
+
+                <button
+                    type="button"
+                    data-bs-target="#testimonialCarousel"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Testimoni 1 sampai 3"
+                ></button>
+
+                <button
+                    type="button"
+                    data-bs-target="#testimonialCarousel"
+                    data-bs-slide-to="1"
+                    aria-label="Testimoni 4 sampai 6"
+                ></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+/* =========================================================
+   HOMEPAGE - LOCATION LINK
+   ========================================================= */
+
+.wasibu-location-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.wasibu-location-link .wasibu-about-item {
+    cursor: pointer;
+}
+
+.wasibu-location-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-top: 12px;
+
+    color: var(--scarlet);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.wasibu-location-link:hover .wasibu-location-action {
+    color: var(--deep-red);
+}
+
+.wasibu-location-link:hover .wasibu-about-icon {
+    background: var(--scarlet);
+}
+
+.wasibu-location-link:hover .wasibu-about-icon i {
+    color: var(--cream);
+}
+
+/* =========================================================
+   HOMEPAGE TAMBAHAN - MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .wasibu-ambiance,
+    .wasibu-testimonials {
+        padding: 60px 20px;
+    }
+
+    .wasibu-ambiance h2,
+    .wasibu-testimonials h2 {
+        font-size: 28px;
+    }
+
+    .wasibu-ambiance-item,
+    .wasibu-ambiance-large {
+        height: 230px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .wasibu-testimonial-card {
+        padding: 24px;
+    }
+
+}
+
+/* =========================================================
+   TESTIMONI - CAROUSEL
+   ========================================================= */
+
+.wasibu-testimonials {
+    background: var(--warm-white);
+}
+
+
+/* Beri ruang kiri kanan untuk tombol carousel */
+
+.wasibu-testimonials .carousel {
+    position: relative;
+    padding: 0 55px 50px;
+}
+
+
+/* Tombol previous / next */
+
+.wasibu-testimonial-control {
+    top: 50%;
+    bottom: auto;
+
+    width: 44px;
+    height: 44px;
+
+    transform: translateY(-50%);
+
+    border: 1px solid rgba(171, 49, 48, 0.18);
+    border-radius: 50%;
+
+    background: var(--scarlet);
+    color: var(--cream);
+
+    opacity: 1;
+
+    font-size: 20px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.wasibu-testimonial-control:hover {
+    background: var(--deep-red);
+    color: var(--cream);
+}
+
+
+/* Letak tombol */
+
+.wasibu-testimonial-prev {
+    left: 0;
+}
+
+.wasibu-testimonial-next {
+    right: 0;
+}
+
+
+/* Indicator bawah */
+
+.wasibu-testimonial-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 28px;
+}
+
+.wasibu-testimonial-indicators button {
+    width: 10px;
+    height: 10px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: rgba(171, 49, 48, 0.3);
+
+    transition:
+        width 0.25s ease,
+        background 0.25s ease;
+}
+
+.wasibu-testimonial-indicators button.active {
+    width: 30px;
+    background: var(--scarlet);
+}
+
+/* Info Kafe dibedakan dari section galeri */
+.wasibu-about {
+    background: var(--warm-white);
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.wasibu-about-item {
+    background: #ffffff;
+}
+
+/* =========================================================
+   AMBIANCE - CAROUSEL
+   ========================================================= */
+
+.wasibu-ambiance-carousel {
+    position: relative;
+    padding: 0 52px;
+}
+
+.wasibu-gallery-control {
+    top: 50%;
+    bottom: auto;
+
+    width: 42px;
+    height: 42px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: var(--scarlet);
+    color: var(--cream);
+
+    opacity: 1;
+
+    font-size: 20px;
+}
+
+.wasibu-gallery-control:hover {
+    background: var(--deep-red);
+    color: var(--cream);
+}
+
+.wasibu-gallery-prev {
+    left: 0;
+}
+
+.wasibu-gallery-next {
+    right: 0;
+}
+
+
+@media (max-width: 767.98px) {
+
+    .wasibu-ambiance-carousel {
+        padding: 0;
+    }
+
+    .wasibu-gallery-control {
+        width: 38px;
+        height: 38px;
+
+        background: rgba(103, 25, 31, 0.88);
+    }
+
+    .wasibu-gallery-prev {
+        left: 8px;
+    }
+
+    .wasibu-gallery-next {
+        right: 8px;
+    }
+
+}
+
+/* =========================================================
+   TESTIMONI FINAL
+   ========================================================= */
+
+.wasibu-testimonials {
+    padding: 70px 20px;
+    background: var(--cream);
+}
+
+.wasibu-testimonials h2 {
+    margin-bottom: 12px;
+
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 400;
+
+    color: var(--deep-red);
+}
+
+.wasibu-testimonials > .container > .text-center > p {
+    max-width: 680px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: rgba(18, 18, 18, 0.7);
+}
+
+
+/* Area carousel */
+
+.wasibu-testimonial-carousel {
+    position: relative;
+    padding: 0 55px;
+}
+
+
+/* KARTU TESTIMONI */
+
+.wasibu-testimonials .wasibu-testimonial-card {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 260px;
+
+    padding: 28px;
+
+    border: 1px solid rgba(103, 25, 31, 0.1);
+    border-radius: 22px;
+
+    background: var(--warm-white);
+
+    box-shadow: 0 5px 18px rgba(18, 18, 18, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.wasibu-testimonials .wasibu-testimonial-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 14px 30px rgba(18, 18, 18, 0.09);
+}
+
+
+/* Bintang */
+
+.wasibu-testimonials .wasibu-testimonial-stars {
+    display: flex;
+    gap: 4px;
+
+    margin-bottom: 18px;
+
+    color: var(--scarlet);
+}
+
+
+/* Isi testimoni */
+
+.wasibu-testimonials .wasibu-testimonial-text {
+    flex-grow: 1;
+
+    margin-bottom: 26px;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: rgba(18, 18, 18, 0.76);
+}
+
+
+/* User */
+
+.wasibu-testimonials .wasibu-testimonial-user {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.wasibu-testimonials .wasibu-testimonial-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--scarlet);
+    color: var(--cream);
+
+    font-family: var(--font-heading);
+    font-size: 20px;
+}
+
+.wasibu-testimonials .wasibu-testimonial-user strong {
+    display: block;
+
+    color: var(--midnight);
+
+    font-size: 16px;
+}
+
+.wasibu-testimonials .wasibu-testimonial-user span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: rgba(18, 18, 18, 0.55);
+
+    font-size: 14px;
+}
+
+
+/* Tombol kiri kanan */
+
+.wasibu-testi-control {
+    top: 50%;
+    bottom: auto;
+
+    width: 42px;
+    height: 42px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: var(--scarlet);
+    color: var(--cream);
+
+    opacity: 1;
+
+    font-size: 20px;
+}
+
+.wasibu-testi-control:hover {
+    background: var(--deep-red);
+    color: var(--cream);
+}
+
+.wasibu-testi-prev {
+    left: 0;
+}
+
+.wasibu-testi-next {
+    right: 0;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 767.98px) {
+
+    .wasibu-testimonials {
+        padding: 55px 20px;
+    }
+
+    .wasibu-testimonials h2 {
+        font-size: 28px;
+    }
+
+    .wasibu-testimonial-carousel {
+        padding: 0 0 55px;
+    }
+
+    .wasibu-testimonials .carousel-item .col-md-4 {
+        margin-bottom: 18px;
+    }
+
+    .wasibu-testi-control {
+        top: auto;
+        bottom: 0;
+
+        width: 40px;
+        height: 40px;
+
+        transform: none;
+    }
+
+    .wasibu-testi-prev {
+        left: calc(50% - 52px);
+    }
+
+    .wasibu-testi-next {
+        right: calc(50% - 52px);
+    }
+
+}
+
+/* =========================================================
+   HOMEPAGE - AMBIANCE FINAL
+   ========================================================= */
+
+.wasibu-ambiance {
+    padding: 65px 20px;
+    background: var(--cream);
+}
+
+.wasibu-ambiance h2 {
+    margin-bottom: 12px;
+
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 400;
+
+    color: var(--deep-red);
+}
+
+.wasibu-ambiance > .container > .text-center > p {
+    max-width: 680px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: rgba(18, 18, 18, 0.7);
+}
+
+
+/* Area slider */
+
+.wasibu-ambiance-carousel {
+    position: relative;
+    padding: 0 55px;
+}
+
+
+/* Semua foto sama besar dan kotak */
+
+.wasibu-ambiance .wasibu-ambiance-item {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: var(--warm-white);
+}
+
+.wasibu-ambiance .wasibu-ambiance-item img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.35s ease;
+}
+
+.wasibu-ambiance .wasibu-ambiance-item:hover img {
+    transform: scale(1.04);
+}
+
+
+/* Pastikan hanya slide aktif yang tampil */
+
+.wasibu-ambiance-carousel .carousel-item {
+    display: none;
+}
+
+.wasibu-ambiance-carousel .carousel-item.active {
+    display: block;
+}
+
+
+/* Tombol kiri / kanan */
+
+.wasibu-gallery-control {
+    top: 50%;
+    bottom: auto;
+
+    width: 42px;
+    height: 42px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: var(--scarlet);
+    color: var(--cream);
+
+    opacity: 1;
+
+    font-size: 20px;
+}
+
+.wasibu-gallery-control:hover {
+    background: var(--deep-red);
+    color: var(--cream);
+}
+
+.wasibu-gallery-prev {
+    left: 0;
+}
+
+.wasibu-gallery-next {
+    right: 0;
+}
+
+
+/* Mobile */
+
+@media (max-width: 767.98px) {
+
+    .wasibu-ambiance {
+        padding: 50px 12px;
+    }
+
+    .wasibu-ambiance h2 {
+        font-size: 28px;
+    }
+
+    .wasibu-ambiance-carousel {
+        padding: 0 42px;
+    }
+
+    .wasibu-gallery-control {
+        width: 34px;
+        height: 34px;
+
+        font-size: 16px;
+    }
+
+}
+
+/* =========================================================
+   HOMEPAGE - LOKASI WASIBU
+   ========================================================= */
+
+.wasibu-location-section {
+    padding: 80px 20px;
+    background: var(--warm-white);
+}
+
+
+/* Informasi kiri */
+
+.wasibu-location-info {
+    padding: 10px 20px 10px 0;
+}
+
+.wasibu-location-info h2 {
+    margin-bottom: 14px;
+
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 400;
+
+    color: var(--deep-red);
+}
+
+.wasibu-location-intro {
+    max-width: 480px;
+
+    margin-bottom: 32px;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: rgba(18, 18, 18, 0.7);
+}
+
+
+/* Baris alamat, jam, telepon */
+
+.wasibu-location-detail {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+}
+
+.wasibu-location-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--cream);
+    color: var(--scarlet);
+
+    font-size: 19px;
+}
+
+.wasibu-location-detail h5 {
+    margin-bottom: 5px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: var(--midnight);
+}
+
+.wasibu-location-detail p {
+    margin: 0;
+
+    font-size: 16px;
+    line-height: 1.6;
+
+    color: rgba(18, 18, 18, 0.68);
+}
+
+
+/* Tombol Google Maps */
+
+.wasibu-location-button {
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   GOOGLE MAPS
+   ========================================================= */
+
+.wasibu-map-wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 430px;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(103, 25, 31, 0.1);
+
+    box-shadow: 0 14px 35px rgba(18, 18, 18, 0.08);
+
+    background: var(--cream);
+}
+
+.wasibu-map-wrapper iframe {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    min-height: 430px;
+
+    border: 0;
+}
+
+
+/* =========================================================
+   LOKASI - MOBILE
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .wasibu-location-section {
+        padding: 60px 20px;
+    }
+
+    .wasibu-location-info {
+        padding-right: 0;
+    }
+
+    .wasibu-map-wrapper,
+    .wasibu-map-wrapper iframe {
+        min-height: 360px;
+    }
+
+}
+
+
+@media (max-width: 575.98px) {
+
+    .wasibu-location-section {
+        padding: 50px 16px;
+    }
+
+    .wasibu-location-info h2 {
+        font-size: 30px;
+    }
+
+    .wasibu-location-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .wasibu-map-wrapper,
+    .wasibu-map-wrapper iframe {
+        min-height: 300px;
+    }
+
+}
+
+/* =========================================================
+   MENU PEMESANAN - FONT WASIBU
+   ========================================================= */
+
+.menu-page {
+    font-family: var(--font-body);
+}
+
+
+/* Judul utama menu */
+
+.menu-page h1,
+.menu-page h2,
+.menu-page h3 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+}
+
+
+/* Isi */
+
+.menu-page p,
+.menu-page span,
+.menu-page button,
+.menu-page input {
+    font-family: var(--font-body);
+}
+
+.menu-page .hero-menu h1 {
+    color: var(--deep-red);
+    font-family: var(--font-heading);
+    font-weight: 400;
+}
+
+/* Logo navbar menu.php agar sama dengan homepage */
+
+.wasibu-logo {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 400;
+
+    color: var(--deep-red);
+
+    text-decoration: none;
+}
+
+.wasibu-logo:hover {
+    color: var(--scarlet);
+}
+
+.menu-page .navbar-brand {
+
+    font-family: var(--font-heading);
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    color: var(--deep-red);
+}
+
+/* CUSTOMER EXPERIENCE */
+.customer-app {
+    min-height: 100vh;
+    background: var(--brand-background);
+    color: var(--brand-primary-dark);
+    font-family: var(--font-body);
+}
+
+.customer-app main.container {
+    max-width: 1200px;
+    padding-top: 34px !important;
+    padding-bottom: 52px !important;
+}
+
+.customer-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    padding: 0;
+    border-bottom: 1px solid rgba(65, 7, 9, 0.1);
+    background: rgba(255, 247, 245, 0.94);
+    box-shadow: 0 3px 14px rgba(65, 7, 9, 0.045);
+    backdrop-filter: blur(12px);
+    transition: box-shadow 220ms ease, background-color 220ms ease;
+}
+
+.customer-navbar.is-scrolled {
+    background: rgba(255, 247, 245, 0.98);
+    box-shadow: 0 7px 22px rgba(65, 7, 9, 0.11);
+}
+
+.customer-navbar-inner {
+    display: flex;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    min-height: 108px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.customer-navbar .customer-navbar-brand {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.customer-navbar .wasibu-navbar-logo {
+    display: block;
+    width: auto;
+    height: 88px;
+    max-width: 190px;
+    object-fit: contain;
+}
+
+.customer-nav-track {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(18px, 2.2vw, 30px);
+    --customer-indicator-x: 0px;
+    --customer-indicator-y: 0px;
+    --customer-indicator-width: 0px;
+}
+
+.customer-nav-track::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--customer-indicator-width);
+    height: 2px;
+    transform: translate3d(var(--customer-indicator-x), var(--customer-indicator-y), 0);
+    border-radius: 2px;
+    background: var(--brand-primary);
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), width 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+}
+
+.customer-nav-track.has-active-indicator::after {
+    opacity: 1;
+}
+
+.customer-nav-links,
+.customer-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.7vw, 24px);
+}
+
+.customer-nav-links a,
+.customer-nav-actions a {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 9px;
+    border-radius: 9px;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.customer-nav-links a:hover,
+.customer-nav-links a:focus-visible,
+.customer-nav-links a.is-active,
+.customer-nav-actions a.is-active {
+    border-radius: 9px;
+    background: #f3e1d8;
+    color: var(--brand-primary);
+    font-weight: 700;
+}
+
+.customer-nav-links a:hover,
+.customer-nav-links a:focus-visible,
+.customer-nav-actions a:hover,
+.customer-nav-actions a:focus-visible {
+    background: #f9eee9;
+}
+
+.customer-nav-links a[data-customer-nav="home"] { order: 1; }
+.customer-nav-links a[href*="#tentang"] { order: 2; }
+.customer-nav-links a[href*="#kontak"] { order: 3; }
+.customer-nav-links a[data-customer-nav="menu"] { order: 4; }
+
+.customer-nav-actions a {
+    justify-content: center;
+    padding: 0 9px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+}
+
+.customer-nav-actions a[data-customer-nav="orders"] {
+    padding: 0 9px;
+    border: 0;
+    background: transparent;
+}
+
+.customer-nav-actions a[data-customer-nav="cart"] {
+    min-height: 42px;
+    padding: 0 14px;
+    border: 1px solid rgba(157, 21, 29, 0.25);
+    border-radius: 9px;
+    background: #fff;
+}
+
+.customer-nav-actions a[data-customer-nav="cart"]::before {
+    margin-right: 8px;
+    font-family: "bootstrap-icons" !important;
+    font-size: 1.08rem;
+    font-weight: 400;
+    content: "\f244";
+}
+
+.customer-nav-actions a[data-customer-nav="cart"] > i {
+    display: none;
+}
+
+.customer-profile-menu {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.customer-profile-trigger {
+    display: inline-flex;
+    width: 42px;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(157, 21, 29, 0.25);
+    border-radius: 9px;
+    background: #fff;
+    color: var(--brand-primary-dark);
+    cursor: pointer;
+    list-style: none;
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.customer-profile-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.customer-profile-trigger::marker {
+    content: "";
+}
+
+.customer-profile-trigger i {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.customer-profile-trigger:hover,
+.customer-profile-trigger:focus-visible,
+.customer-profile-menu[open] .customer-profile-trigger {
+    border-color: var(--brand-primary);
+    background: #f9eee9;
+    color: var(--brand-primary);
+}
+
+.customer-profile-trigger:focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
+}
+
+.customer-profile-dropdown {
+    position: absolute;
+    z-index: 1050;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    padding: 7px;
+    border: 1px solid rgba(65, 7, 9, 0.12);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(65, 7, 9, 0.14);
+}
+
+.customer-profile-username {
+    display: block;
+    overflow: hidden;
+    padding: 9px 11px;
+    color: var(--brand-primary-dark);
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.customer-profile-link {
+    display: block;
+    width: 100%;
+    padding: 9px 11px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.customer-profile-link:hover,
+.customer-profile-link:focus-visible {
+    background: #f9eee9;
+    color: var(--brand-primary);
+}
+
+.customer-navbar .customer-nav-actions .wasibu-cart-badge {
+    position: static;
+    display: inline-flex;
+    min-width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--brand-primary);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.customer-nav-actions a:hover,
+.customer-nav-actions a:focus-visible {
+    border-color: var(--brand-primary);
+    color: var(--brand-primary-dark);
+}
+
+.customer-nav-actions a.is-active {
+    border-color: rgba(157, 21, 29, 0.18);
+    background: #f3e1d8;
+    color: var(--brand-primary);
+}
+
+.customer-app .btn {
+    min-height: 42px;
+    border-radius: 9px;
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.customer-app .card {
+    overflow: hidden;
+    border: 1px solid rgba(65, 7, 9, 0.09) !important;
+    border-radius: 14px !important;
+    background: #fff;
+    box-shadow: 0 7px 22px rgba(65, 7, 9, 0.065) !important;
+}
+
+.customer-app .product-card {
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.customer-app .product-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(157, 21, 29, 0.2) !important;
+    box-shadow: 0 14px 30px rgba(65, 7, 9, 0.12) !important;
+}
+
+.customer-app .product-image {
+    height: 230px;
+    object-fit: cover;
+}
+
+.customer-app .product-media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #fff0ed;
+}
+
+.customer-app .product-media .product-image,
+.customer-app .product-media .product-placeholder {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+}
+
+.customer-app .product-card.is-stock-out .product-media::after {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(37, 31, 31, 0.48);
+    color: #fff;
+    content: "Stok Habis";
+    font-size: 1rem;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.customer-app .product-card.is-stock-out .product-media > * {
+    filter: grayscale(0.55);
+}
+
+.customer-app .stock-disabled-action {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(65, 7, 9, 0.12);
+    border-radius: 9px;
+    background: #eee8e6;
+    color: #746b69;
+    cursor: not-allowed;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.customer-app .product-card .card-body {
+    padding: 19px;
+}
+
+.customer-app .product-price,
+.customer-app .menu-product-price {
+    color: var(--brand-primary);
+    font-size: 1.16rem;
+    font-weight: 700;
+}
+
+.customer-app .product-detail-card,
+.customer-app .checkout-card,
+.customer-app .checkout-summary,
+.customer-app .payment-card,
+.customer-app .cart-summary-card,
+.customer-app .order-card {
+    border-radius: 14px !important;
+    box-shadow: 0 10px 30px rgba(65, 7, 9, 0.075) !important;
+}
+
+.customer-app .product-detail-card {
+    display: grid;
+    width: 100%;
+    max-width: 1040px;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: stretch;
+    margin: 0 auto;
+    background: #fff;
+}
+
+.customer-app .product-detail-media {
+    position: relative;
+    min-width: 0;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #fff0ed;
+}
+
+.customer-app .product-detail-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
+    object-fit: contain;
+}
+
+.customer-app .product-detail-media.is-stock-out::after {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(37, 31, 31, 0.42);
+    color: #fff;
+    content: "Stok Habis";
+    font-size: 1rem;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.customer-app .product-detail-card > .card-body {
+    align-self: center;
+    padding: 30px !important;
+}
+
+.customer-app .form-control,
+.customer-app .form-select {
+    min-height: 45px;
+    border: 1px solid rgba(65, 7, 9, 0.16);
+    border-radius: 9px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+.customer-app .form-control:focus,
+.customer-app .form-select:focus {
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 0.2rem rgba(157, 21, 29, 0.13);
+}
+
+.customer-app .text-bg-primary,
+.customer-app .text-bg-info {
+    background: var(--brand-soft-accent) !important;
+    color: #fff !important;
+}
+
+.customer-app .text-bg-secondary {
+    background: #ece2df !important;
+    color: #514143 !important;
+}
+
+.customer-app .wasibu-hero-content {
+    text-shadow: 0 2px 16px rgba(20, 4, 5, 0.24);
+}
+
+.customer-app .wasibu-hero .carousel-item::after {
+    background: linear-gradient(90deg, rgba(35, 5, 7, 0.7), rgba(35, 5, 7, 0.22) 68%, rgba(35, 5, 7, 0.08));
+}
+
+.customer-app .wasibu-btn,
+.customer-app .wasibu-order-btn {
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.customer-app .wasibu-btn:hover,
+.customer-app .wasibu-order-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(65, 7, 9, 0.18);
+}
+
+.customer-app .customer-empty-state {
+    padding: 44px 24px;
+    border: 1px dashed rgba(65, 7, 9, 0.18);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.72);
+    text-align: center;
+}
+
+.customer-app .wasibu-hero {
+    height: 550px;
+    min-height: 460px;
+    max-height: 72vh;
+}
+
+.customer-app .wasibu-hero .carousel-item img {
+    object-position: center 44%;
+}
+
+.customer-app .wasibu-hero .carousel-item::after {
+    background: linear-gradient(180deg, rgba(30, 5, 7, 0.18), rgba(30, 5, 7, 0.26) 38%, rgba(30, 5, 7, 0.54));
+}
+
+.customer-app .wasibu-hero-content {
+    align-items: center;
+    text-align: center;
+}
+
+.customer-app .wasibu-hero-text {
+    max-width: 760px;
+    margin: 0 auto;
+    animation: customer-hero-enter 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.customer-app .wasibu-hero-text p {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.customer-app .wasibu-hero-text .d-flex {
+    justify-content: center;
+}
+
+@keyframes customer-hero-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.customer-favorites {
+    padding: 68px 0 74px;
+    background: var(--brand-background);
+}
+
+.customer-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.customer-section-heading h2 {
+    margin: 0;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.customer-section-heading p {
+    margin: 7px 0 0;
+    color: #76585a;
+    font-size: 1rem;
+}
+
+.customer-section-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(157, 21, 29, 0.3);
+    color: var(--brand-primary);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.customer-section-link:hover {
+    color: var(--brand-primary-dark);
+}
+
+.favorite-product-card {
+    overflow: hidden;
+    border: 1px solid rgba(65, 7, 9, 0.09);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 7px 22px rgba(65, 7, 9, 0.065);
+    animation: customer-favorite-enter 450ms ease both;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.promo-page {
+    padding: 28px 0 72px;
+    background: var(--brand-background);
+}
+
+.promo-banner {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 5;
+    min-height: 210px;
+    max-height: 400px;
+    border-radius: 12px;
+    background: var(--brand-primary-dark);
+}
+
+.promo-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.promo-banner::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(35, 5, 7, 0.52), rgba(35, 5, 7, 0.04));
+    content: "";
+    pointer-events: none;
+}
+
+.promo-intro {
+    padding: 42px 0 24px;
+}
+
+.promo-intro h1 {
+    margin: 0;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-heading);
+    font-size: 2.6rem;
+    font-weight: 400;
+}
+
+.promo-intro p {
+    max-width: 60ch;
+    margin: 8px 0 0;
+    color: #76585a;
+}
+
+.promo-poster {
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid rgba(65, 7, 9, 0.12);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(65, 7, 9, 0.07);
+}
+
+.promo-poster-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 9px 9px 0 0;
+    background: #fff0ed;
+}
+
+.promo-poster-content {
+    padding: clamp(22px, 3vw, 34px);
+}
+
+.promo-poster h2 {
+    margin: 0 0 8px;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.promo-poster-menu {
+    margin: 0;
+    color: var(--brand-primary-dark);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.promo-poster-terms {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(65, 7, 9, 0.12);
+}
+
+.promo-poster-terms h3 {
+    margin: 0 0 8px;
+    color: #76585a;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.promo-poster-terms ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #76585a;
+    font-size: 0.84rem;
+    line-height: 1.6;
+}
+
+.favorite-product-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(157, 21, 29, 0.2);
+    box-shadow: 0 14px 30px rgba(65, 7, 9, 0.12);
+}
+
+.favorite-product-media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #fff0ed;
+}
+
+.favorite-product-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 220ms ease;
+}
+
+.favorite-product-card:hover .favorite-product-media img {
+    transform: scale(1.035);
+}
+
+.favorite-product-placeholder {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    color: var(--brand-primary);
+    font-size: 2rem;
+}
+
+.favorite-product-category {
+    color: #76585a;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.favorite-product-card h3 {
+    min-height: 2.7em;
+    margin: 7px 0 12px;
+    color: var(--brand-primary-dark);
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.favorite-product-price {
+    margin-bottom: 14px;
+    color: var(--brand-primary);
+    font-size: 1.12rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.customer-favorite-button {
+    display: flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--brand-primary);
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.customer-favorite-button:hover {
+    transform: translateY(-1px);
+    background: var(--brand-primary-dark);
+    color: #fff;
+}
+
+.favorite-product-card.is-stock-out .favorite-product-media::after {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(37, 31, 31, 0.48);
+    color: #fff;
+    content: "Stok Habis";
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.favorite-product-card.is-stock-out .favorite-product-media img {
+    filter: grayscale(0.55);
+}
+
+.favorite-product-card.is-stock-out .customer-favorite-button {
+    border: 1px solid rgba(65, 7, 9, 0.12);
+    background: #eee8e6;
+    color: #746b69;
+    cursor: not-allowed;
+}
+
+@keyframes customer-favorite-enter {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 991.98px) {
+    .customer-navbar-inner {
+        min-height: 92px;
+    }
+
+    .customer-navbar .wasibu-navbar-logo {
+        height: 76px;
+        max-width: 175px;
+    }
+
+    .customer-nav-track {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 2px 14px;
+    }
+
+    .customer-nav-links,
+    .customer-nav-actions {
+        gap: 11px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .admin-shell main.container {
+        width: calc(100% - 96px);
+        margin-right: 8px;
+        margin-left: 88px;
+    }
+
+    .admin-shell:not(.admin-sidebar-collapsed) .admin-sidebar {
+        width: min(260px, calc(100vw - 56px));
+    }
+}
+
+@media (max-width: 767.98px) {
+    .customer-app .wasibu-hero {
+        height: 450px;
+        min-height: 420px;
+        max-height: 68vh;
+    }
+
+    .customer-app .wasibu-hero-text h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .promo-banner {
+        aspect-ratio: 4 / 3;
+        min-height: 190px;
+        max-height: 280px;
+    }
+
+    .promo-intro {
+        padding-top: 32px;
+    }
+
+    .promo-intro h1 {
+        font-size: 2rem;
+    }
+
+    .customer-favorites {
+        padding: 48px 0 54px;
+    }
+
+    .favorite-product-card h3 {
+        min-height: 0;
+    }
+
+    .customer-navbar-inner {
+        width: calc(100% - 32px);
+        min-height: 0;
+        flex-wrap: wrap;
+        padding: 8px 0 10px;
+        gap: 4px 12px;
+    }
+
+    .customer-navbar .wasibu-navbar-logo {
+        height: 64px;
+        max-width: min(42vw, 165px);
+    }
+
+    .customer-nav-track {
+        flex: 1 1 100%;
+        justify-content: space-between;
+        gap: 5px 8px;
+    }
+
+    .customer-nav-links {
+        display: grid;
+        flex: 1 1 100%;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2px 5px;
+        order: 1;
+    }
+
+    .customer-nav-links a {
+        min-height: 36px;
+        justify-content: center;
+        font-size: 0.84rem;
+    }
+
+    .customer-nav-actions {
+        width: 100%;
+        justify-content: flex-end;
+        gap: 8px;
+        order: 2;
+    }
+
+    .customer-nav-actions a {
+        min-height: 38px;
+        padding: 0 11px;
+        font-size: 0.86rem;
+    }
+
+    .customer-profile-trigger {
+        width: 38px;
+        min-height: 38px;
+    }
+
+    .customer-app .product-detail-card {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .customer-app .product-detail-media {
+        aspect-ratio: 4 / 3;
+    }
+
+    .customer-app .product-detail-card > .card-body {
+        padding: 22px !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .customer-nav-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .customer-navbar,
+    .customer-nav-track::after,
+    .customer-nav-links a,
+    .customer-nav-actions a,
+    .customer-app .product-card,
+    .customer-app .wasibu-btn,
+    .customer-app .wasibu-order-btn {
+        transition: none;
+    }
+}
+

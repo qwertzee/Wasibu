@@ -48,7 +48,7 @@ unset($card);
     <title><?= htmlspecialchars($campaign['title'], ENT_QUOTES, 'UTF-8') ?> - Wasibu</title>
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>" rel="stylesheet">
 </head>
 
 <body class="customer-app">
@@ -67,6 +67,7 @@ unset($card);
                 </nav>
             </div>
         </div>
+        <?= wasibuCustomerMobileNavbar() ?>
     </nav>
 
     <main class="promo-page">
@@ -117,7 +118,7 @@ unset($card);
     </main>
 
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app.js?v=<?= filemtime(__DIR__ . '/assets/js/app.js') ?>"></script>
 </body>
 
 </html>

@@ -20,7 +20,10 @@ function wasibuBasePath(): string
 
 function wasibuUrl(string $path): string
 {
-    return wasibuBasePath() . '/' . ltrim($path, '/');
+    $basePath = trim(str_replace('\\', '/', wasibuBasePath()), '/');
+    $normalizedPath = ltrim(str_replace('\\', '/', $path), '/');
+
+    return ($basePath !== '' ? '/' . $basePath : '') . '/' . $normalizedPath;
 }
 
 function wasibuHomeUrl(): string
@@ -45,7 +48,7 @@ function wasibuLogoLink(string $class = 'navbar-brand'): string
     );
 }
 
-function wasibuCustomerNavActions(): string
+function wasibuCustomerNavActions(bool $includeOrders = true, bool $iconOnlyCart = false): string
 {
     $cartCount = array_sum($_SESSION['cart'] ?? []);
     $ordersUrl = htmlspecialchars(wasibuUrl('pesanan-saya.php'), ENT_QUOTES, 'UTF-8');
@@ -53,8 +56,14 @@ function wasibuCustomerNavActions(): string
     $loginUrl = htmlspecialchars(wasibuUrl('login.php'), ENT_QUOTES, 'UTF-8');
     $registerUrl = htmlspecialchars(wasibuUrl('register.php'), ENT_QUOTES, 'UTF-8');
     $logoutUrl = htmlspecialchars(wasibuUrl('logout.php'), ENT_QUOTES, 'UTF-8');
-    $html = '<a href="' . $ordersUrl . '" class="customer-nav-action" data-customer-nav="orders">Pesanan Saya</a>';
-    $html .= '<a href="' . $cartUrl . '" class="customer-nav-action" data-customer-nav="cart" aria-label="Keranjang"><i class="bi bi-cart3" aria-hidden="true"></i> Keranjang';
+    $html = '';
+    if ($includeOrders) {
+        $html .= '<a href="' . $ordersUrl . '" class="customer-nav-action" data-customer-nav="orders">Pesanan Saya</a>';
+    }
+    $cartLabel = $iconOnlyCart
+        ? '<span class="visually-hidden">Keranjang</span>'
+        : 'Keranjang';
+    $html .= '<a href="' . $cartUrl . '" class="customer-nav-action" data-customer-nav="cart" aria-label="Keranjang"><i class="bi bi-cart3" aria-hidden="true"></i>' . $cartLabel;
     if ($cartCount > 0) {
         $html .= '<span class="wasibu-cart-badge">' . (int) $cartCount . '</span>';
     }
@@ -75,5 +84,35 @@ function wasibuCustomerNavActions(): string
         $html .= '<a href="' . $registerUrl . '" class="customer-profile-link">Daftar</a>';
     }
     $html .= '</div></details>';
+    return $html;
+}
+
+function wasibuCustomerMobileNavbar(): string
+{
+    $menuItems = [
+        ['index.php', 'home', 'bi-house-door', 'Beranda'],
+        ['index.php#tentang', 'about', 'bi-info-circle', 'Tentang Kami'],
+        ['index.php#kontak', 'contact', 'bi-telephone', 'Kontak'],
+        ['daftar-menu.php', 'menu', 'bi-grid', 'Menu'],
+        ['pesanan-saya.php', 'orders', 'bi-bag-check', 'Pesanan Saya'],
+    ];
+
+    $html = '<div class="customer-navbar-mobile">';
+    $html .= '<button type="button" class="customer-mobile-menu-toggle" data-customer-menu-open aria-label="Buka navigasi" aria-expanded="false" aria-controls="customer-mobile-sidebar"><i class="bi bi-list" aria-hidden="true"></i></button>';
+    $html .= wasibuLogoLink('customer-mobile-brand');
+    $html .= '<nav class="customer-nav-actions customer-nav-actions-mobile" aria-label="Akun dan keranjang">';
+    $html .= wasibuCustomerNavActions(false, true);
+    $html .= '</nav></div>';
+
+    $html .= '<button type="button" class="customer-sidebar-backdrop" data-customer-menu-close aria-label="Tutup navigasi" tabindex="-1"></button>';
+    $html .= '<aside class="customer-mobile-sidebar" id="customer-mobile-sidebar" aria-label="Navigasi customer" aria-hidden="true" inert>';
+    $html .= '<div class="customer-mobile-sidebar-header">' . wasibuLogoLink('customer-sidebar-brand') . '<button type="button" class="customer-mobile-menu-close" data-customer-menu-close aria-label="Tutup navigasi"><i class="bi bi-x-lg" aria-hidden="true"></i></button></div>';
+    $html .= '<nav class="customer-mobile-sidebar-menu" aria-label="Menu customer">';
+    foreach ($menuItems as [$path, $route, $icon, $label]) {
+        $href = htmlspecialchars(wasibuUrl($path), ENT_QUOTES, 'UTF-8');
+        $html .= '<a href="' . $href . '" class="customer-mobile-nav-link" data-customer-nav="' . $route . '"><i class="bi ' . $icon . '" aria-hidden="true"></i><span>' . $label . '</span></a>';
+    }
+    $html .= '</nav></aside>';
+
     return $html;
 }

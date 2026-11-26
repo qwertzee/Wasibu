@@ -424,7 +424,7 @@ $order = $_SESSION['last_order'];
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
 
 </head>
 
@@ -446,6 +446,7 @@ $order = $_SESSION['last_order'];
             </nav>
         </div>
     </div>
+    <?= wasibuCustomerMobileNavbar() ?>
 </nav>
 
 
@@ -570,7 +571,7 @@ $order = $_SESSION['last_order'];
 </main>
 
 
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=<?= filemtime(__DIR__ . '/assets/js/app.js') ?>"></script>
 </body>
 
 </html>

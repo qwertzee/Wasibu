@@ -205,7 +205,7 @@ if ($categoryId > 0) {
 
     <!-- CSS utama -->
     <link
-        href="assets/css/style.css"
+        href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>"
         rel="stylesheet"
     >
 
@@ -233,6 +233,7 @@ if ($categoryId > 0) {
             </nav>
         </div>
     </div>
+    <?= wasibuCustomerMobileNavbar() ?>
 </nav>
 
 
@@ -388,7 +389,7 @@ if ($categoryId > 0) {
         <?php if (count($products) > 0): ?>
 
 
-            <div class="row g-3 g-md-4">
+            <div class="row g-3 g-md-4 customer-product-grid">
 
 
                 <?php foreach ($products as $product): ?>
@@ -586,6 +587,10 @@ $imagePath = "assets/images/products/" . $product['slug'] . ".jpg";
 
                                     <?php endif; ?>
 
+                                    <a
+                                        href="product.php?id=<?= (int) $product['id'] ?>"
+                                        class="wasibu-menu-detail-link"
+                                    >Lihat Detail</a>
 
                                 </div>
 
@@ -851,7 +856,7 @@ $imagePath = "assets/images/products/" . $product['slug'] . ".jpg";
 <!-- Bootstrap JS lokal -->
 
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=<?= filemtime(__DIR__ . '/assets/js/app.js') ?>"></script>
 
 
 </body>

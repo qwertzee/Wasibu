@@ -85,7 +85,7 @@ if (!empty($cart)) {
 
     <link
         rel="stylesheet"
-        href="assets/css/style.css"
+        href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>"
     >
 
 </head>
@@ -113,6 +113,7 @@ if (!empty($cart)) {
             </nav>
         </div>
     </div>
+    <?= wasibuCustomerMobileNavbar() ?>
 </nav>
 
 
@@ -165,7 +166,8 @@ if (!empty($cart)) {
 
         <?php endif; ?>
 
-        <div class="card border-0 shadow-sm mb-4">
+        <?php if (!empty($products)): ?>
+        <div class="card border-0 shadow-sm mb-3 cart-account-card">
             <div class="card-body p-3 p-md-4">
                 <?php if (!empty($_SESSION['customer_id'])): ?>
                     <strong>Masuk sebagai <?= htmlspecialchars((string) $_SESSION['customer_username']) ?></strong>
@@ -181,6 +183,7 @@ if (!empty($cart)) {
                 <?php endif; ?>
             </div>
         </div>
+        <?php endif; ?>
 
     </div>
 
@@ -534,7 +537,7 @@ if (!empty($cart)) {
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 ></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=<?= filemtime(__DIR__ . '/assets/js/app.js') ?>"></script>
 
 
 </body>

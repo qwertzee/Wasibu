@@ -176,7 +176,7 @@ $_SESSION['checkout']['checkout_id'] = bin2hex(random_bytes(16));
 
     <link
         rel="stylesheet"
-        href="assets/css/style.css"
+        href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>"
     >
 
 </head>
@@ -200,6 +200,7 @@ $_SESSION['checkout']['checkout_id'] = bin2hex(random_bytes(16));
             </nav>
         </div>
     </div>
+    <?= wasibuCustomerMobileNavbar() ?>
 </nav>
 
 
@@ -320,7 +321,7 @@ $_SESSION['checkout']['checkout_id'] = bin2hex(random_bytes(16));
 </main>
 
 
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=<?= filemtime(__DIR__ . '/assets/js/app.js') ?>"></script>
 </body>
 
 </html>

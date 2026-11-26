@@ -150,7 +150,7 @@ $products = $productQuery->fetchAll();
 
     <link
         rel="stylesheet"
-        href="assets/css/style.css"
+        href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>"
     >
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -178,6 +178,7 @@ $products = $productQuery->fetchAll();
             </nav>
         </div>
     </div>
+    <?= wasibuCustomerMobileNavbar() ?>
 </nav>
 
 
@@ -646,7 +647,7 @@ $imagePath = "assets/images/products/" . $product['slug'] . ".jpg";
 
 <!-- JavaScript -->
 
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=<?= filemtime(__DIR__ . '/assets/js/app.js') ?>"></script>
 
 
 </body>

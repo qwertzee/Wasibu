@@ -1082,21 +1082,27 @@ body {
 @media (max-width: 575.98px) {
 
     .wasibu-menu-header {
-        padding: 38px 0 32px;
+        padding: 24px 0 20px;
     }
 
     .wasibu-menu-header h1 {
-        font-size: 2.35rem;
+        margin-bottom: 8px;
+        font-size: 2rem;
+    }
+
+    .wasibu-menu-header p {
+        font-size: 0.92rem;
+        line-height: 1.5;
     }
 
     .wasibu-menu-header .wasibu-btn {
-        width: 100%;
-        justify-content: center;
+        min-height: 40px;
+        padding: 8px 14px;
     }
 
     .wasibu-menu-main {
-        padding-top: 24px;
-        padding-bottom: 50px;
+        padding-top: 16px;
+        padding-bottom: 34px;
     }
 
     .wasibu-category-pill {
@@ -1138,11 +1144,6 @@ body {
 
 @media (max-width: 768px) {
 
-    .wasibu-hero {
-        height: 50vh;
-        min-height: 420px;
-    }
-
     .wasibu-hero .carousel-item::after {
         background: rgba(18, 18, 18, 0.6);
     }
@@ -1162,6 +1163,252 @@ body {
     }
 }
 
+@media (max-width: 767.98px) {
+    .customer-app main.container {
+        width: 100%;
+        padding: 24px 16px 38px !important;
+    }
+
+    .customer-app .promo-page {
+        padding-top: 18px;
+        padding-bottom: 42px;
+    }
+
+    .customer-app .promo-page > .container {
+        width: 100%;
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .customer-app .wasibu-hero-text {
+        padding: 0 12px;
+    }
+
+    .customer-app .wasibu-hero-text p {
+        max-width: 42ch;
+        font-size: clamp(0.94rem, 3.8vw, 1.08rem);
+    }
+
+    .customer-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    .customer-section-heading h2 {
+        font-size: clamp(1.55rem, 6vw, 1.9rem);
+    }
+
+    .customer-section-link {
+        white-space: normal;
+    }
+
+    .promo-intro {
+        padding: 28px 0 18px;
+    }
+
+    .promo-intro h1 {
+        font-size: clamp(1.8rem, 7vw, 2.3rem);
+    }
+
+    .promo-banner {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .promo-poster-image {
+        width: 100%;
+        height: auto;
+        max-height: 68svh;
+        aspect-ratio: auto;
+        object-fit: contain;
+    }
+
+    .customer-app .card-body {
+        overflow-wrap: anywhere;
+    }
+
+    .customer-app .btn,
+    .customer-app button {
+        touch-action: manipulation;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .customer-app main.container {
+        padding-right: 13px !important;
+        padding-left: 13px !important;
+    }
+
+    .customer-app h1 {
+        font-size: clamp(1.65rem, 7vw, 2.15rem);
+        line-height: 1.18;
+        overflow-wrap: anywhere;
+    }
+
+    .customer-app h2 {
+        line-height: 1.22;
+        overflow-wrap: anywhere;
+    }
+
+    .customer-app .row {
+        --bs-gutter-x: 1rem;
+    }
+
+    .customer-favorites {
+        padding: 38px 0 44px;
+    }
+
+    .favorite-product-card h3 {
+        font-size: 0.94rem;
+        line-height: 1.3;
+    }
+
+    .favorite-product-card .card-body {
+        padding: 12px;
+    }
+
+    .favorite-product-category {
+        font-size: 0.78rem;
+    }
+
+    .favorite-product-price {
+        font-size: 0.98rem;
+    }
+
+    .customer-favorite-button {
+        min-height: 42px;
+        padding: 7px;
+        font-size: 0.82rem;
+    }
+
+    .promo-poster-content {
+        padding: 18px;
+    }
+
+    .promo-poster-menu {
+        font-size: 1.02rem;
+    }
+
+    .customer-app .wasibu-ambiance .row > .col-4 {
+        width: 50%;
+    }
+
+    .customer-app .order-card .card-body {
+        padding: 18px !important;
+    }
+
+    .customer-app .table-responsive {
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 359.98px) {
+    .customer-app .favorite-product-card .card-body {
+        padding: 9px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .customer-app main.container {
+        padding-top: 24px !important;
+        padding-bottom: 38px !important;
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+    }
+
+    .customer-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .promo-banner {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .promo-intro h1 {
+        font-size: clamp(1.8rem, 7vw, 2.3rem);
+    }
+
+    .promo-poster-image {
+        width: 100%;
+        height: auto;
+        max-height: 68svh;
+        aspect-ratio: auto;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .customer-app main.container {
+        padding-right: 13px !important;
+        padding-left: 13px !important;
+    }
+
+    .customer-app h1 {
+        font-size: clamp(1.65rem, 7vw, 2.15rem);
+        line-height: 1.18;
+        overflow-wrap: anywhere;
+    }
+
+    .customer-app h2 {
+        line-height: 1.22;
+        overflow-wrap: anywhere;
+    }
+
+    .customer-favorites {
+        padding: 38px 0 44px;
+    }
+
+    .favorite-product-card h3 {
+        min-height: 0;
+        font-size: 0.94rem;
+        line-height: 1.3;
+    }
+
+    .favorite-product-card .card-body {
+        padding: 12px;
+    }
+
+    .favorite-product-category {
+        font-size: 0.78rem;
+    }
+
+    .favorite-product-price {
+        font-size: 0.98rem;
+    }
+
+    .customer-favorite-button {
+        min-height: 42px;
+        padding: 7px;
+        font-size: 0.82rem;
+    }
+
+    .promo-poster-content {
+        padding: 18px;
+    }
+
+    .promo-poster-menu {
+        font-size: 1.02rem;
+    }
+
+    .customer-app .wasibu-ambiance .row > .col-4 {
+        width: 50%;
+    }
+
+    .customer-app .order-card .card-body {
+        padding: 18px !important;
+    }
+}
+
+@media (max-width: 359.98px) {
+    .customer-favorites .row > [class*="col-"] {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+}
 
 /* =========================================================
    TAHAP 2 - WARNA SELURUH WEBSITE (menimpa aturan lama di atas)
@@ -1641,6 +1888,10 @@ body {
     font-weight: 400;
 }
 
+.login-page .customer-back-home {
+    display: none;
+}
+
 .login-page .login-form {
     display: block;
     width: 100%;
@@ -1705,6 +1956,25 @@ body {
     .login-page .login-logo {
         height: 120px;
         max-width: 190px;
+    }
+
+    .login-page .customer-back-home {
+        display: flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+        border-radius: 8px;
+        color: var(--brand-primary);
+        font-size: 0.92rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .login-page .customer-back-home:hover,
+    .login-page .customer-back-home:focus-visible {
+        background: #f9eee9;
+        color: var(--brand-primary-dark);
     }
 }
 
@@ -2122,390 +2392,6 @@ body {
 .wasibu-footer p {
     color: rgba(238, 219, 191, 0.7);
 }
-/* TESTIMONI */
-
-<section class="wasibu-testimonials">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <span class="wasibu-eyebrow">
-                Kata Mereka
-            </span>
-
-            <h2>
-                Cerita dari Pengunjung Wasibu
-            </h2>
-
-            <p>
-                Beberapa kesan dari pengunjung yang menikmati
-                makanan dan suasana di Wasibu Cafe.
-            </p>
-
-        </div>
-
-
-        <div
-            id="testimonialCarousel"
-            class="carousel slide"
-            data-bs-ride="carousel"
-            data-bs-interval="6000"
-        >
-
-            <div class="carousel-inner">
-
-
-                <!-- ================================================= -->
-                <!-- SLIDE 1 -->
-                <!-- ================================================= -->
-
-                <div class="carousel-item active">
-
-                    <div class="row g-4">
-
-
-                        <!-- Testimoni 1 -->
-
-                        <div class="col-md-4">
-
-                            <div class="wasibu-testimonial-card h-100">
-
-                                <div class="wasibu-testimonial-stars">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-
-                                <p class="wasibu-testimonial-text">
-                                    “Tempatnya nyaman banget buat nongkrong.
-                                    Makanannya juga enak dan pilihan menunya banyak.”
-                                </p>
-
-                                <div class="wasibu-testimonial-user">
-
-                                    <div class="wasibu-testimonial-avatar">
-                                        A
-                                    </div>
-
-                                    <div>
-                                        <strong>Andini</strong>
-                                        <span>Pelanggan Wasibu</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Testimoni 2 -->
-
-                        <div class="col-md-4">
-
-                            <div class="wasibu-testimonial-card h-100">
-
-                                <div class="wasibu-testimonial-stars">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-
-                                <p class="wasibu-testimonial-text">
-                                    “Cocok banget buat nugas sambil ngopi.
-                                    Suasananya tenang dan pelayanannya juga ramah.”
-                                </p>
-
-                                <div class="wasibu-testimonial-user">
-
-                                    <div class="wasibu-testimonial-avatar">
-                                        R
-                                    </div>
-
-                                    <div>
-                                        <strong>Raka</strong>
-                                        <span>Pelanggan Wasibu</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Testimoni 3 -->
-
-                        <div class="col-md-4">
-
-                            <div class="wasibu-testimonial-card h-100">
-
-                                <div class="wasibu-testimonial-stars">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-
-                                <p class="wasibu-testimonial-text">
-                                    “Pesan makanannya gampang dan nggak ribet.
-                                    Bakal balik lagi buat cobain menu lainnya.”
-                                </p>
-
-                                <div class="wasibu-testimonial-user">
-
-                                    <div class="wasibu-testimonial-avatar">
-                                        N
-                                    </div>
-
-                                    <div>
-                                        <strong>Nabila</strong>
-                                        <span>Pelanggan Wasibu</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-
-                <!-- ================================================= -->
-                <!-- SLIDE 2 -->
-                <!-- ================================================= -->
-
-                <div class="carousel-item">
-
-                    <div class="row g-4">
-
-
-                        <!-- Testimoni 4 -->
-
-                        <div class="col-md-4">
-
-                            <div class="wasibu-testimonial-card h-100">
-
-                                <div class="wasibu-testimonial-stars">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-
-                                <p class="wasibu-testimonial-text">
-                                    “Tempatnya cozy dan cocok buat kumpul bareng teman.
-                                    Pilihan makanannya juga beragam.”
-                                </p>
-
-                                <div class="wasibu-testimonial-user">
-
-                                    <div class="wasibu-testimonial-avatar">
-                                        D
-                                    </div>
-
-                                    <div>
-                                        <strong>Dimas</strong>
-                                        <span>Pelanggan Wasibu</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Testimoni 5 -->
-
-                        <div class="col-md-4">
-
-                            <div class="wasibu-testimonial-card h-100">
-
-                                <div class="wasibu-testimonial-stars">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-
-                                <p class="wasibu-testimonial-text">
-                                    “Minumannya enak dan suasananya nyaman.
-                                    Enak juga kalau mau ngobrol lama sama teman.”
-                                </p>
-
-                                <div class="wasibu-testimonial-user">
-
-                                    <div class="wasibu-testimonial-avatar">
-                                        S
-                                    </div>
-
-                                    <div>
-                                        <strong>Salsabila</strong>
-                                        <span>Pelanggan Wasibu</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Testimoni 6 -->
-
-                        <div class="col-md-4">
-
-                            <div class="wasibu-testimonial-card h-100">
-
-                                <div class="wasibu-testimonial-stars">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-
-                                <p class="wasibu-testimonial-text">
-                                    “Pelayanannya cepat, makanannya enak,
-                                    dan tempatnya bikin betah buat santai.”
-                                </p>
-
-                                <div class="wasibu-testimonial-user">
-
-                                    <div class="wasibu-testimonial-avatar">
-                                        F
-                                    </div>
-
-                                    <div>
-                                        <strong>Fajar</strong>
-                                        <span>Pelanggan Wasibu</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Tombol Previous -->
-
-            <button
-                class="carousel-control-prev wasibu-testimonial-control wasibu-testimonial-prev"
-                type="button"
-                data-bs-target="#testimonialCarousel"
-                data-bs-slide="prev"
-                aria-label="Testimoni sebelumnya"
-            >
-
-                <i class="bi bi-chevron-left"></i>
-
-            </button>
-
-
-            <!-- Tombol Next -->
-
-            <button
-                class="carousel-control-next wasibu-testimonial-control wasibu-testimonial-next"
-                type="button"
-                data-bs-target="#testimonialCarousel"
-                data-bs-slide="next"
-                aria-label="Testimoni berikutnya"
-            >
-
-                <i class="bi bi-chevron-right"></i>
-
-            </button>
-
-
-            <!-- Indicator -->
-
-            <div class="wasibu-testimonial-indicators">
-
-                <button
-                    type="button"
-                    data-bs-target="#testimonialCarousel"
-                    data-bs-slide-to="0"
-                    class="active"
-                    aria-current="true"
-                    aria-label="Testimoni 1 sampai 3"
-                ></button>
-
-                <button
-                    type="button"
-                    data-bs-target="#testimonialCarousel"
-                    data-bs-slide-to="1"
-                    aria-label="Testimoni 4 sampai 6"
-                ></button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-/* =========================================================
-   HOMEPAGE - LOCATION LINK
-   ========================================================= */
-
-.wasibu-location-link {
-    display: block;
-    height: 100%;
-    color: inherit;
-    text-decoration: none;
-}
-
-.wasibu-location-link .wasibu-about-item {
-    cursor: pointer;
-}
-
-.wasibu-location-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-
-    margin-top: 12px;
-
-    color: var(--scarlet);
-
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.wasibu-location-link:hover .wasibu-location-action {
-    color: var(--deep-red);
-}
-
-.wasibu-location-link:hover .wasibu-about-icon {
-    background: var(--scarlet);
-}
-
-.wasibu-location-link:hover .wasibu-about-icon i {
-    color: var(--cream);
-}
-
 /* =========================================================
    HOMEPAGE TAMBAHAN - MOBILE
    ========================================================= */
@@ -4085,28 +3971,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 991.98px) {
-    .customer-navbar-inner {
-        min-height: 92px;
-    }
-
-    .customer-navbar .wasibu-navbar-logo {
-        height: 76px;
-        max-width: 175px;
-    }
-
-    .customer-nav-track {
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 2px 14px;
-    }
-
-    .customer-nav-links,
-    .customer-nav-actions {
-        gap: 11px;
-    }
-}
-
 @media (max-width: 767.98px) {
     .admin-shell main.container {
         width: calc(100% - 96px);
@@ -4121,13 +3985,26 @@ body {
 
 @media (max-width: 767.98px) {
     .customer-app .wasibu-hero {
-        height: 450px;
-        min-height: 420px;
-        max-height: 68vh;
+        height: clamp(220px, 62vw, 260px);
+        min-height: 220px;
+        max-height: 260px;
     }
 
     .customer-app .wasibu-hero-text h1 {
-        font-size: clamp(2rem, 8vw, 3rem);
+        margin-bottom: 7px;
+        font-size: clamp(1.45rem, 6vw, 1.9rem);
+    }
+
+    .customer-app .wasibu-hero-text p {
+        margin-bottom: 10px;
+        font-size: clamp(0.8rem, 3.8vw, 0.94rem);
+        line-height: 1.35;
+    }
+
+    .customer-app .wasibu-hero-text .wasibu-btn {
+        min-height: 36px;
+        padding: 7px 12px;
+        font-size: 0.82rem;
     }
 
     .promo-banner {
@@ -4145,62 +4022,74 @@ body {
     }
 
     .customer-favorites {
-        padding: 48px 0 54px;
+        padding: 34px 0 40px;
+    }
+
+    .customer-favorites .row,
+    .customer-product-grid {
+        --bs-gutter-x: 12px;
+        --bs-gutter-y: 12px;
+    }
+
+    .favorite-product-card,
+    .customer-app .product-card {
+        border-radius: 10px;
+    }
+
+    .favorite-product-card .card-body,
+    .customer-app .product-card .card-body {
+        padding: 10px;
+    }
+
+    .favorite-product-card h3 {
+        margin: 5px 0 7px;
+        font-size: 0.88rem;
+        line-height: 1.25;
+    }
+
+    .favorite-product-price {
+        margin-bottom: 8px;
+        font-size: 0.94rem;
+    }
+
+    .customer-app .product-media {
+        aspect-ratio: 4 / 3;
+    }
+
+    .customer-app .product-card .card-title {
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        line-height: 1.25;
+    }
+
+    .customer-app .product-card .product-description {
+        display: -webkit-box;
+        overflow: hidden;
+        margin-bottom: 8px;
+        font-size: 0.76rem;
+        line-height: 1.35;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .customer-app .product-card .product-price {
+        margin-bottom: 7px;
+        font-size: 0.94rem;
+    }
+
+    .customer-app .product-card .btn,
+    .customer-favorite-button {
+        min-height: 40px;
+        padding: 7px 8px;
+        font-size: 0.8rem;
+    }
+
+    .customer-app .wasibu-hero .carousel-indicators {
+        margin-bottom: 12px;
     }
 
     .favorite-product-card h3 {
         min-height: 0;
-    }
-
-    .customer-navbar-inner {
-        width: calc(100% - 32px);
-        min-height: 0;
-        flex-wrap: wrap;
-        padding: 8px 0 10px;
-        gap: 4px 12px;
-    }
-
-    .customer-navbar .wasibu-navbar-logo {
-        height: 64px;
-        max-width: min(42vw, 165px);
-    }
-
-    .customer-nav-track {
-        flex: 1 1 100%;
-        justify-content: space-between;
-        gap: 5px 8px;
-    }
-
-    .customer-nav-links {
-        display: grid;
-        flex: 1 1 100%;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 2px 5px;
-        order: 1;
-    }
-
-    .customer-nav-links a {
-        min-height: 36px;
-        justify-content: center;
-        font-size: 0.84rem;
-    }
-
-    .customer-nav-actions {
-        width: 100%;
-        justify-content: flex-end;
-        gap: 8px;
-        order: 2;
-    }
-
-    .customer-nav-actions a {
-        min-height: 38px;
-        padding: 0 11px;
-        font-size: 0.86rem;
-    }
-
-    .customer-profile-trigger {
-        width: 38px;
-        min-height: 38px;
     }
 
     .customer-app .product-detail-card {
@@ -4208,17 +4097,12 @@ body {
     }
 
     .customer-app .product-detail-media {
-        aspect-ratio: 4 / 3;
+        max-height: 230px;
+        aspect-ratio: 16 / 10;
     }
 
     .customer-app .product-detail-card > .card-body {
-        padding: 22px !important;
-    }
-}
-
-@media (max-width: 420px) {
-    .customer-nav-links {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 16px !important;
     }
 }
 
@@ -4234,3 +4118,779 @@ body {
     }
 }
 
+@media (max-width: 767.98px) {
+    .customer-app main.container {
+        padding-top: 24px !important;
+        padding-bottom: 38px !important;
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+    }
+
+    .customer-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .promo-banner {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .promo-intro h1 {
+        font-size: clamp(1.8rem, 7vw, 2.3rem);
+    }
+
+    .promo-poster-image {
+        width: 100%;
+        height: auto;
+        max-height: 68svh;
+        aspect-ratio: auto;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .customer-app main.container {
+        padding-right: 13px !important;
+        padding-left: 13px !important;
+    }
+
+    .customer-app h1 {
+        font-size: clamp(1.65rem, 7vw, 2.15rem);
+        line-height: 1.18;
+        overflow-wrap: anywhere;
+    }
+
+    .customer-app h2 {
+        line-height: 1.22;
+        overflow-wrap: anywhere;
+    }
+
+    .customer-favorites {
+        padding: 38px 0 44px;
+    }
+
+    .favorite-product-card h3 {
+        min-height: 0;
+        font-size: 0.94rem;
+        line-height: 1.3;
+    }
+
+    .favorite-product-card .card-body {
+        padding: 12px;
+    }
+
+    .favorite-product-category {
+        font-size: 0.78rem;
+    }
+
+    .favorite-product-price {
+        font-size: 0.98rem;
+    }
+
+    .customer-favorite-button {
+        min-height: 42px;
+        padding: 7px;
+        font-size: 0.82rem;
+    }
+
+    .promo-poster-content {
+        padding: 18px;
+    }
+
+    .promo-poster-menu {
+        font-size: 1.02rem;
+    }
+
+    .customer-app .wasibu-ambiance .row > .col-4 {
+        width: 50%;
+    }
+
+    .customer-app .order-card .card-body {
+        padding: 18px !important;
+    }
+}
+
+.customer-navbar > .customer-navbar-mobile,
+.customer-navbar > .customer-mobile-sidebar,
+.customer-navbar > .customer-sidebar-backdrop {
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+    .customer-navbar {
+        position: static;
+        top: auto;
+        z-index: 1030;
+        overflow: visible;
+        backdrop-filter: none;
+    }
+
+    .customer-navbar > .customer-navbar-inner {
+        display: none;
+    }
+
+    .customer-navbar > .customer-navbar-mobile {
+        display: flex;
+        width: 100%;
+        min-height: 64px;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 14px;
+    }
+
+    .customer-mobile-menu-toggle,
+    .customer-mobile-menu-close {
+        display: inline-flex;
+        width: 44px;
+        height: 44px;
+        flex: 0 0 44px;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 8px;
+        background: transparent;
+        color: var(--brand-primary-dark);
+        cursor: pointer;
+    }
+
+    .customer-mobile-menu-toggle:hover,
+    .customer-mobile-menu-close:hover {
+        background: #f9eee9;
+        color: var(--brand-primary);
+    }
+
+    .customer-mobile-menu-toggle i,
+    .customer-mobile-menu-close i {
+        font-size: 1.35rem;
+        line-height: 1;
+    }
+
+    .customer-mobile-menu-toggle:focus-visible,
+    .customer-mobile-menu-close:focus-visible {
+        outline: 2px solid var(--brand-primary);
+        outline-offset: 2px;
+    }
+
+    .customer-navbar .customer-mobile-brand,
+    .customer-navbar .customer-sidebar-brand {
+        display: inline-flex;
+        min-width: 0;
+        flex: 0 1 auto;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .customer-navbar .customer-mobile-brand .wasibu-navbar-logo {
+        width: auto;
+        height: 56px;
+        max-width: min(36vw, 150px);
+        object-fit: contain;
+    }
+
+    .customer-navbar .customer-sidebar-brand .wasibu-navbar-logo {
+        width: auto;
+        height: 46px;
+        max-width: 150px;
+        object-fit: contain;
+    }
+
+    .customer-navbar .customer-nav-actions-mobile {
+        display: flex;
+        width: auto;
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-left: auto;
+    }
+
+    .customer-navbar .customer-nav-actions-mobile a[data-customer-nav="cart"] {
+        position: relative;
+        width: 44px;
+        min-height: 44px;
+        justify-content: center;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        font-size: 0;
+    }
+
+    .customer-navbar .customer-nav-actions-mobile a[data-customer-nav="cart"]::before {
+        margin: 0;
+        font-size: 1.08rem;
+    }
+
+    .customer-navbar .customer-nav-actions-mobile .wasibu-cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        min-width: 17px;
+        height: 17px;
+        margin: 0;
+        padding: 0 4px;
+        font-size: 0.65rem;
+    }
+
+    .customer-navbar .customer-nav-actions-mobile .customer-profile-trigger {
+        width: 44px;
+        min-height: 44px;
+        border: 0;
+        background: transparent;
+    }
+
+    .customer-navbar .customer-nav-actions-mobile .customer-profile-dropdown {
+        right: 0;
+        max-width: min(240px, calc(100vw - 24px));
+    }
+
+    .customer-navbar > .customer-mobile-sidebar {
+        position: fixed;
+        z-index: 1050;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        box-sizing: border-box;
+        width: min(280px, calc(100vw - 48px));
+        height: 100vh;
+        height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 16px 14px;
+        border-right: 1px solid rgba(65, 7, 9, 0.12);
+        background: var(--brand-background);
+        box-shadow: 12px 0 32px rgba(65, 7, 9, 0.14);
+        overscroll-behavior: contain;
+        transform: translateX(-105%);
+        visibility: hidden;
+        transition: transform 240ms ease, visibility 240ms ease;
+    }
+
+    .customer-mobile-sidebar-header {
+        display: flex;
+        min-height: 56px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 2px 12px 10px;
+        border-bottom: 1px solid rgba(65, 7, 9, 0.12);
+    }
+
+    .customer-mobile-sidebar-menu {
+        display: grid;
+        gap: 5px;
+        padding-top: 16px;
+    }
+
+    .customer-mobile-nav-link {
+        display: flex;
+        min-height: 48px;
+        align-items: center;
+        gap: 13px;
+        padding: 0 13px;
+        border-radius: 10px;
+        color: var(--brand-primary-dark);
+        font-family: var(--font-body);
+        font-size: 0.98rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 160ms ease, color 160ms ease;
+    }
+
+    .customer-mobile-nav-link i {
+        display: inline-flex;
+        width: 22px;
+        justify-content: center;
+        color: var(--brand-primary);
+        font-size: 1.08rem;
+    }
+
+    .customer-mobile-nav-link:hover,
+    .customer-mobile-nav-link:focus-visible,
+    .customer-mobile-nav-link.is-active {
+        background: #f3e1d8;
+        color: var(--brand-primary);
+    }
+
+    .customer-mobile-nav-link:focus-visible {
+        outline: 2px solid var(--brand-primary);
+        outline-offset: 2px;
+    }
+
+    .customer-navbar > .customer-sidebar-backdrop {
+        position: fixed;
+        z-index: 1040;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        border: 0;
+        background: rgba(31, 8, 9, 0.48);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 240ms ease;
+    }
+
+    .customer-navbar.customer-menu-open > .customer-mobile-sidebar {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    .customer-navbar.customer-menu-open > .customer-sidebar-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body.customer-sidebar-open {
+        overflow: hidden;
+        touch-action: none;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .customer-app .category-scroll {
+        justify-content: flex-start;
+        touch-action: pan-x;
+        overscroll-behavior-inline: contain;
+    }
+
+    .customer-app .category-scroll > * {
+        flex: 0 0 auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .customer-navbar > .customer-navbar-mobile,
+    .customer-navbar > .customer-mobile-sidebar,
+    .customer-navbar > .customer-sidebar-backdrop {
+        display: none;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .customer-navbar > .customer-navbar-mobile {
+        gap: 6px;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .customer-navbar .customer-mobile-brand .wasibu-navbar-logo {
+        height: 56px;
+        max-width: min(36vw, 140px);
+    }
+
+    .customer-navbar .customer-nav-actions-mobile {
+        gap: 6px;
+    }
+
+    .customer-navbar .customer-nav-actions-mobile a[data-customer-nav="cart"],
+    .customer-navbar .customer-nav-actions-mobile .customer-profile-trigger {
+        width: 44px;
+        min-height: 44px;
+    }
+
+    .customer-app .cart-account-card .card-body {
+        padding: 14px 16px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .customer-favorites {
+        padding: 30px 0 34px;
+    }
+
+    .wasibu-ambiance,
+    .wasibu-about,
+    .wasibu-testimonials,
+    .wasibu-location-section {
+        padding-top: 32px;
+        padding-bottom: 34px;
+    }
+
+    .wasibu-ambiance > .container > .text-center,
+    .wasibu-about > .container > .text-center,
+    .wasibu-testimonials > .container > .text-center {
+        margin-bottom: 18px !important;
+    }
+
+    .wasibu-ambiance h2,
+    .wasibu-about h2,
+    .wasibu-testimonials h2 {
+        margin-bottom: 8px;
+        font-size: clamp(1.45rem, 6vw, 1.8rem);
+    }
+
+    .wasibu-ambiance > .container > .text-center > p,
+    .wasibu-about > .container > .text-center > p,
+    .wasibu-testimonials > .container > .text-center > p {
+        margin-bottom: 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .wasibu-ambiance-carousel {
+        padding: 0;
+    }
+
+    .wasibu-ambiance-carousel .carousel-item > .row,
+    .wasibu-about-carousel,
+    .wasibu-testimonials .carousel-item > .row {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        touch-action: pan-x;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .wasibu-ambiance-carousel .carousel-item > .row::-webkit-scrollbar,
+    .wasibu-about-carousel::-webkit-scrollbar,
+    .wasibu-testimonials .carousel-item > .row::-webkit-scrollbar {
+        display: none;
+    }
+
+    .wasibu-ambiance-carousel .carousel-item > .row,
+    .wasibu-about-carousel {
+        --bs-gutter-x: 12px;
+        --bs-gutter-y: 0;
+    }
+
+    .wasibu-ambiance-carousel .carousel-item > .row > .col-4 {
+        flex: 0 0 50%;
+        width: 50%;
+        max-width: 50%;
+        scroll-snap-align: start;
+    }
+
+    .wasibu-ambiance .wasibu-ambiance-item {
+        height: auto;
+        aspect-ratio: 4 / 3;
+        border-radius: 14px;
+    }
+
+    .wasibu-about-carousel > [class*="col-"] {
+        flex: 0 0 72%;
+        width: 72%;
+        max-width: 72%;
+        scroll-snap-align: start;
+    }
+
+    .wasibu-about-carousel {
+        justify-content: flex-start !important;
+    }
+
+    .wasibu-about-item {
+        display: flex;
+        min-height: 170px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 14px;
+        border-radius: 14px;
+    }
+
+    .wasibu-about-item h5 {
+        margin-bottom: 5px;
+        font-size: 1rem;
+    }
+
+    .wasibu-about-item p {
+        font-size: 0.9rem;
+        line-height: 1.45;
+    }
+
+    .wasibu-about .wasibu-location-link {
+        color: var(--brand-primary-dark);
+        text-decoration: none;
+    }
+
+    .wasibu-about .wasibu-location-link:hover,
+    .wasibu-about .wasibu-location-link:focus-visible {
+        color: var(--brand-primary);
+    }
+
+    .wasibu-about .wasibu-location-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 9px;
+        color: var(--brand-primary);
+        font-size: 0.82rem;
+        font-weight: 600;
+    }
+
+    .wasibu-testimonials .wasibu-testimonial-carousel {
+        padding: 0 0 48px;
+    }
+
+    .wasibu-testimonials .carousel-item > .row {
+        --bs-gutter-x: 12px;
+        --bs-gutter-y: 0;
+    }
+
+    .wasibu-testimonials .carousel-item .col-md-4 {
+        flex: 0 0 86%;
+        width: 86%;
+        max-width: 86%;
+        margin-bottom: 0;
+        scroll-snap-align: start;
+    }
+
+    .wasibu-testimonials .wasibu-testimonial-card {
+        min-height: 215px;
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .wasibu-testimonials .wasibu-testimonial-stars {
+        margin-bottom: 12px;
+    }
+
+    .wasibu-testimonials .wasibu-testimonial-text {
+        margin-bottom: 14px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .wasibu-testimonials .wasibu-testimonial-avatar {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .wasibu-about-carousel > [class*="col-"] {
+        --bs-gutter-y: 0;
+    }
+
+    .wasibu-location-section .row {
+        --bs-gutter-x: 12px;
+        --bs-gutter-y: 12px;
+        align-items: flex-start !important;
+    }
+
+    .wasibu-location-info {
+        padding: 0;
+    }
+
+    .wasibu-location-info h2 {
+        margin-bottom: 8px;
+        font-size: clamp(1.45rem, 6vw, 1.8rem);
+    }
+
+    .wasibu-location-intro {
+        margin-bottom: 14px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .wasibu-location-detail {
+        gap: 9px;
+        margin-bottom: 12px;
+    }
+
+    .wasibu-location-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+    }
+
+    .wasibu-location-detail h5 {
+        margin-bottom: 3px;
+        font-size: 0.88rem;
+    }
+
+    .wasibu-location-detail p {
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+
+    .wasibu-location-button {
+        min-height: 42px;
+        margin-top: 4px;
+        padding: 8px 10px;
+        font-size: 0.82rem;
+    }
+
+    .wasibu-map-wrapper,
+    .wasibu-map-wrapper iframe {
+        height: 220px;
+        min-height: 0;
+    }
+
+    .wasibu-map-wrapper {
+        border-radius: 14px;
+    }
+
+    .wasibu-menu-page .wasibu-menu-header {
+        padding: 20px 0 16px;
+    }
+
+    .wasibu-menu-page .wasibu-menu-main {
+        padding-top: 12px;
+        padding-bottom: 30px;
+    }
+
+    .wasibu-menu-page .customer-product-grid {
+        --bs-gutter-x: 10px;
+        --bs-gutter-y: 10px;
+    }
+
+    .wasibu-menu-page .product-card .card-body {
+        padding: 10px;
+    }
+
+    .wasibu-menu-page .product-card .card-title {
+        min-height: 2.4em;
+        margin-bottom: 5px;
+        font-size: 0.92rem;
+        line-height: 1.22;
+    }
+
+    .wasibu-menu-page .product-category {
+        font-size: 0.76rem;
+    }
+
+    .wasibu-menu-page .product-description {
+        margin-bottom: 8px;
+        font-size: 0.76rem;
+        line-height: 1.35;
+        -webkit-line-clamp: 2;
+    }
+
+    .wasibu-menu-page .product-price {
+        font-size: 0.92rem;
+    }
+
+    .wasibu-menu-page .wasibu-menu-detail-link {
+        display: flex;
+        min-height: 40px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+        padding: 6px 8px;
+        border-radius: 8px;
+        background: var(--brand-primary);
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .wasibu-menu-detail-link:hover,
+    .wasibu-menu-detail-link:focus-visible {
+        background: var(--brand-primary-dark);
+        color: #fff;
+    }
+
+    .menu-page .hero-section > .container {
+        padding-top: 22px !important;
+        padding-bottom: 22px !important;
+    }
+
+    .menu-page .hero-section h1 {
+        margin-bottom: 8px;
+        font-size: clamp(1.6rem, 6vw, 1.9rem);
+    }
+
+    .menu-page .hero-section p {
+        margin-bottom: 14px !important;
+        font-size: 0.9rem;
+        line-height: 1.45;
+    }
+
+    .menu-page .search-form .form-control,
+    .menu-page .search-form .btn {
+        min-height: 44px;
+        font-size: 0.92rem;
+    }
+
+    .menu-page main .row.g-4 {
+        --bs-gutter-x: 10px;
+        --bs-gutter-y: 10px;
+    }
+
+    .menu-page main .row.g-4 > [class*="col-"] {
+        flex: 0 0 50%;
+        width: 50%;
+        max-width: 50%;
+    }
+
+    .menu-page .product-card .card-body {
+        padding: 10px;
+    }
+
+    .menu-page .product-card .card-title {
+        min-height: 2.4em;
+        margin-bottom: 5px;
+        font-size: 0.92rem;
+        line-height: 1.22;
+    }
+
+    .menu-page .product-card .product-description {
+        display: -webkit-box;
+        overflow: hidden;
+        margin-bottom: 8px;
+        font-size: 0.76rem;
+        line-height: 1.35;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .menu-page .product-card .product-price {
+        margin-bottom: 7px;
+        font-size: 0.92rem;
+    }
+
+    .menu-page .product-card .btn,
+    .menu-page .product-card .stock-disabled-action {
+        min-height: 40px;
+        margin-top: 8px !important;
+        padding: 6px 8px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+    }
+
+    .customer-app .cart-product-image,
+    .customer-app .cart-product-placeholder {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+    }
+
+    .customer-app .checkout-summary {
+        position: static;
+        top: auto;
+    }
+
+    .customer-app .checkout-card .card-body,
+    .customer-app .checkout-summary .card-body,
+    .customer-app .cart-summary-card .card-body {
+        padding: 16px !important;
+    }
+}
+
+.wasibu-menu-detail-link {
+    display: none;
+}
+
+@media (min-width: 480px) and (max-width: 767.98px) {
+    .wasibu-location-section .wasibu-location-column,
+    .wasibu-location-section .wasibu-map-column {
+        flex: 0 0 50%;
+        width: 50%;
+        max-width: 50%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .customer-mobile-sidebar,
+    .customer-sidebar-backdrop,
+    .customer-mobile-nav-link {
+        transition: none;
+    }
+}

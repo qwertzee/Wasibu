@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Login - WASIBU</title>
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
 </head>
 <body class="customer-app login-page">
     <main class="container py-5 login-layout">
@@ -69,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <button class="btn btn-dark w-100 rounded-pill py-3" type="submit">Login</button>
                         </form>
                         <p class="text-center mt-3 mb-0">Belum punya akun? <a href="register.php">Daftar</a></p>
+                        <a class="customer-back-home" href="<?= htmlspecialchars(wasibuUrl('index.php'), ENT_QUOTES, 'UTF-8') ?>">← Kembali ke Beranda</a>
                     </div>
                 </div>
             </div>

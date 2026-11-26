@@ -94,7 +94,7 @@ $heroSlides = [
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
     <!-- CSS utama -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>" rel="stylesheet">
 </head>
 
 <body class="customer-app">
@@ -114,6 +114,7 @@ $heroSlides = [
                 </nav>
             </div>
         </div>
+        <?= wasibuCustomerMobileNavbar() ?>
     </nav>
 
 
@@ -180,7 +181,7 @@ $heroSlides = [
                         : 'assets/images/products/' . $favoriteProduct['slug'] . '.jpg';
                     $favoriteStockOut = (int) $favoriteProduct['stock'] <= 0;
                     ?>
-                    <div class="col-6 col-lg-3">
+                    <div class="col-6 col-md-4 col-lg-3">
                         <article class="card favorite-product-card h-100 <?= $favoriteStockOut ? 'is-stock-out' : '' ?>">
                             <div class="favorite-product-media">
                                 <?php if (file_exists($favoriteImagePath)): ?>
@@ -267,7 +268,7 @@ $heroSlides = [
             id="ambianceCarousel"
             class="carousel slide wasibu-ambiance-carousel"
             data-bs-ride="false"
-            data-bs-touch="true"
+            data-bs-touch="false"
         >
 
             <div class="carousel-inner">
@@ -326,7 +327,7 @@ $heroSlides = [
                         <div class="col-4">
                             <div class="wasibu-ambiance-item">
                                 <img
-                                    src="assets/images/Cafe4.jpg"
+                                    src="assets/images/ambie4.jpg"
                                     alt="Interior Wasibu Cafe"
                                     loading="lazy"
                                 >
@@ -336,7 +337,7 @@ $heroSlides = [
                         <div class="col-4">
                             <div class="wasibu-ambiance-item">
                                 <img
-                                    src="assets/images/Cafe5.jpg"
+                                    src="assets/images/ambie5.jpg"
                                     alt="Area duduk Wasibu Cafe"
                                     loading="lazy"
                                 >
@@ -346,7 +347,7 @@ $heroSlides = [
                         <div class="col-4">
                             <div class="wasibu-ambiance-item">
                                 <img
-                                    src="assets/images/Cafe6.jpg"
+                                    src="assets/images/ambie6.jpg"
                                     alt="Ambiance Wasibu Cafe"
                                     loading="lazy"
                                 >
@@ -400,7 +401,7 @@ $heroSlides = [
                 <p>Everything you need to know about Wasibu Cafe.</p>
             </div>
 
-            <div class="row g-4 justify-content-center">
+            <div class="row g-4 justify-content-center wasibu-about-carousel">
 
               <div class="col-md-6 col-lg-3">
 
@@ -499,7 +500,7 @@ $heroSlides = [
             id="testimonialCarousel"
             class="carousel slide wasibu-testimonial-carousel"
             data-bs-ride="false"
-            data-bs-touch="true"
+            data-bs-touch="false"
         >
 
             <div class="carousel-inner">
@@ -798,7 +799,7 @@ $heroSlides = [
         <div class="row align-items-stretch g-4">
 
             <!-- INFORMASI LOKASI -->
-            <div class="col-lg-5">
+            <div class="col-12 col-lg-5 wasibu-location-column">
 
                 <div class="wasibu-location-info h-100">
 
@@ -891,7 +892,7 @@ $heroSlides = [
 
 
             <!-- GOOGLE MAPS -->
-            <div class="col-lg-7">
+            <div class="col-12 col-lg-7 wasibu-map-column">
 
                 <div class="wasibu-map-wrapper">
 
@@ -927,7 +928,7 @@ $heroSlides = [
 
     <!-- Bootstrap JS -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app.js?v=<?= filemtime(__DIR__ . '/assets/js/app.js') ?>"></script>
 
 </body>
 

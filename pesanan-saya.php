@@ -203,7 +203,7 @@ function paymentStatusClass($status)
 
     <link
         rel="stylesheet"
-        href="assets/css/style.css"
+        href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>"
     >
 
 </head>
@@ -231,6 +231,7 @@ function paymentStatusClass($status)
             </nav>
         </div>
     </div>
+    <?= wasibuCustomerMobileNavbar() ?>
 </nav>
 
 
@@ -686,7 +687,7 @@ function paymentStatusClass($status)
 </main>
 
 
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=<?= filemtime(__DIR__ . '/assets/js/app.js') ?>"></script>
 </body>
 
 </html>

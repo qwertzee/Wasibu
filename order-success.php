@@ -5,6 +5,7 @@ session_start();
 require_once 'config/navigation.php';
 require 'config/database.php';
 require_once 'config/customer.php';
+require_once 'config/promos.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: checkout.php');
@@ -27,6 +28,7 @@ if (!customerCsrfValidate($_POST['csrf_token'] ?? null)) {
 $checkout = $_SESSION['checkout'] ?? null;
 
 $cart = $_SESSION['cart'] ?? [];
+$promoCart = promoSchemaReady($pdo) ? ($_SESSION['promo_cart'] ?? []) : [];
 
 $postedCheckoutId = (string) ($_POST['checkout_id'] ?? '');
 if (!$checkout || !hash_equals((string) ($checkout['checkout_id'] ?? ''), $postedCheckoutId)) {
@@ -41,7 +43,7 @@ if (!empty($_SESSION['last_order']['checkout_id'])
 }
 
 
-if (!$checkout || empty($cart)) {
+if (!$checkout || (empty($cart) && empty($promoCart))) {
 
     header('Location: menu.php');
     exit;
@@ -72,30 +74,22 @@ $paymentRecordStatus = $paymentMethod === 'cash' ? 'pending' : 'waiting_confirma
 |--------------------------------------------------------------------------
 */
 
-$productIds = array_keys($cart);
-
-$placeholders = implode(
-    ',',
-    array_fill(0, count($productIds), '?')
-);
-
-
-$stmt = $pdo->prepare("
-    SELECT
-        id,
-        name,
-        base_price
-    FROM products
-    WHERE id IN ($placeholders)
-      AND is_available = 1
-");
-
-$stmt->execute($productIds);
-
-$products = $stmt->fetchAll();
+$products = [];
+if (!empty($cart)) {
+    $productIds = array_keys($cart);
+    $placeholders = implode(',', array_fill(0, count($productIds), '?'));
+    $stmt = $pdo->prepare("
+        SELECT id, name, base_price
+        FROM products
+        WHERE id IN ($placeholders)
+          AND is_available = 1
+    ");
+    $stmt->execute($productIds);
+    $products = $stmt->fetchAll();
+}
 
 
-if (empty($products)) {
+if (empty($products) && empty($promoCart)) {
 
     header('Location: cart.php');
     exit;
@@ -128,21 +122,49 @@ foreach ($products as $product) {
 
 
     $total += $subtotal;
-
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Buat kode pesanan
-|--------------------------------------------------------------------------
-*/
-
-$orderCode =
-    'WSB-'
-    . date('Ymd-His')
-    . '-'
-    . random_int(100, 999);
+$promoDetails = [];
+foreach ($promoCart as $promoId => $quantity) {
+    $promoStmt = $pdo->prepare("
+        SELECT id, title, promo_price, active_weekdays, is_active, starts_at, ends_at
+        FROM promos WHERE id = ? LIMIT 1
+    ");
+    $promoStmt->execute([(int) $promoId]);
+    $promo = $promoStmt->fetch();
+    if (!$promo || (int) $quantity < 1 || (float) $promo['promo_price'] <= 0 || !promoAvailableNow($promo)) {
+        $_SESSION['checkout_error'] = 'Promo berubah atau tidak tersedia. Periksa kembali keranjang.';
+        header('Location: checkout.php');
+        exit;
+    }
+    $linkedStmt = $pdo->prepare("
+        SELECT pp.product_id, pp.quantity, p.name, p.stock, p.is_available
+        FROM promo_products pp
+        INNER JOIN products p ON p.id = pp.product_id
+        WHERE pp.promo_id = ?
+    ");
+    $linkedStmt->execute([(int) $promoId]);
+    $components = $linkedStmt->fetchAll();
+    if (!$components) {
+        $_SESSION['checkout_error'] = 'Isi paket promo belum dikonfigurasi.';
+        header('Location: checkout.php');
+        exit;
+    }
+    foreach ($components as $component) {
+        $required = (int) $quantity * (int) $component['quantity'];
+        if ((int) $component['is_available'] !== 1 || $component['stock'] === null || $required > (int) $component['stock']) {
+            $_SESSION['checkout_error'] = 'Stok komponen promo berubah atau tidak mencukupi.';
+            header('Location: checkout.php');
+            exit;
+        }
+    }
+    $promoDetails[(int) $promoId] = [
+        'promo' => $promo,
+        'quantity' => (int) $quantity,
+        'components' => $components
+    ];
+    $total += (float) $promo['promo_price'] * (int) $quantity;
+}
 
 
 /*
@@ -154,6 +176,11 @@ $orderCode =
 try {
 
     $pdo->beginTransaction();
+    $orderCreatedAt = (string) $pdo->query('SELECT NOW()')->fetchColumn();
+    $orderCode = 'WSB-'
+        . (new DateTimeImmutable($orderCreatedAt, new DateTimeZone('Asia/Jakarta')))->format('Ymd-His')
+        . '-'
+        . random_int(100, 999);
 
 
     /*
@@ -177,9 +204,10 @@ try {
                 total,
                 order_status,
                 payment_status,
-                customer_note
+                customer_note,
+                created_at
             )
-            VALUES (?, ?, ?, ?, ?, NULL, ?, ?, 'pending', ?, ?)
+            VALUES (?, ?, ?, ?, ?, NULL, ?, ?, 'pending', ?, ?, ?)
         ");
         $orderStmt->execute([
             $customerId,
@@ -190,7 +218,8 @@ try {
             $total,
             $total,
             $orderPaymentStatus,
-            $customerNote !== '' ? $customerNote : null
+            $customerNote !== '' ? $customerNote : null,
+            $orderCreatedAt
         ]);
     } else {
         $orderStmt = $pdo->prepare("
@@ -203,9 +232,10 @@ try {
                 total,
                 order_status,
                 payment_status,
-                customer_note
+                customer_note,
+                created_at
             )
-            VALUES (?, ?, ?, NULL, ?, ?, 'pending', ?, ?)
+            VALUES (?, ?, ?, NULL, ?, ?, 'pending', ?, ?, ?)
         ");
         $orderStmt->execute([
             $orderCode,
@@ -214,7 +244,8 @@ try {
             $total,
             $total,
             $orderPaymentStatus,
-            $customerNote !== '' ? $customerNote : null
+            $customerNote !== '' ? $customerNote : null,
+            $orderCreatedAt
         ]);
     }
 
@@ -311,6 +342,55 @@ try {
 
     }
 
+    foreach ($promoDetails as $promoDetail) {
+        $promo = $promoDetail['promo'];
+        $promoQuantity = $promoDetail['quantity'];
+        $promoSubtotal = (float) $promo['promo_price'] * $promoQuantity;
+        $promoHasSnapshotColumns = (bool) $pdo->query("SHOW COLUMNS FROM order_items LIKE 'promo_id'")->fetch();
+
+        if ($promoHasSnapshotColumns) {
+            $promoItemStmt = $pdo->prepare("
+                INSERT INTO order_items (
+                    order_id, product_id, variant_id, promo_id, promo_name_snapshot,
+                    product_name_snapshot, variant_name_snapshot, quantity, unit_price, subtotal, notes
+                ) VALUES (?, NULL, NULL, ?, ?, ?, NULL, ?, ?, ?, ?)
+            ");
+            $componentNames = [];
+            foreach ($promoDetail['components'] as $component) {
+                $componentNames[] = (int) $component['quantity'] . '× ' . $component['name'];
+            }
+            $promoItemStmt->execute([
+                $orderId,
+                (int) $promo['id'],
+                $promo['title'],
+                $promo['title'],
+                $promoQuantity,
+                (float) $promo['promo_price'],
+                $promoSubtotal,
+                'Isi paket: ' . implode(' + ', $componentNames)
+            ]);
+
+            $componentStmt = $pdo->prepare("
+                INSERT INTO order_items (
+                    order_id, product_id, variant_id, promo_id, promo_name_snapshot,
+                    product_name_snapshot, variant_name_snapshot, quantity, unit_price, subtotal, notes
+                ) VALUES (?, ?, NULL, ?, ?, ?, NULL, ?, 0, 0, ?)
+            ");
+            foreach ($promoDetail['components'] as $component) {
+                $componentQuantity = $promoQuantity * (int) $component['quantity'];
+                $componentStmt->execute([
+                    $orderId,
+                    (int) $component['product_id'],
+                    (int) $promo['id'],
+                    $promo['title'],
+                    $component['name'],
+                    $componentQuantity,
+                    'Komponen paket ' . $promo['title']
+                ]);
+            }
+        }
+    }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -373,6 +453,7 @@ if (!in_array(
 */
 
 $_SESSION['cart'] = [];
+$_SESSION['promo_cart'] = [];
 
 unset($_SESSION['seller_note']);
 

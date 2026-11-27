@@ -6,6 +6,8 @@ require_once __DIR__ . '/auth.php';
 require_once '../config/navigation.php';
 require '../config/database.php';
 
+date_default_timezone_set('Asia/Jakarta');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -259,10 +261,10 @@ function paymentStatusClass($status)
 
 
     <a
-        href="dashboard.php"
+        href="orders.php"
         class="text-decoration-none text-secondary d-inline-block mb-4"
     >
-        ← Kembali ke Beranda
+        ← Kembali ke Pesanan
     </a>
 
 
@@ -657,6 +659,11 @@ function paymentStatusClass($status)
                                 name="order_id"
                                 value="<?= $order['id'] ?>"
                             >
+                            <?php foreach (['search', 'order_status', 'payment_status'] as $paramName): ?>
+                                <?php if (isset($_GET[$paramName]) && is_string($_GET[$paramName]) && $_GET[$paramName] !== ''): ?>
+                                    <input type="hidden" name="<?= htmlspecialchars($paramName, ENT_QUOTES, 'UTF-8') ?>" value="<?= htmlspecialchars(substr($_GET[$paramName], 0, 100), ENT_QUOTES, 'UTF-8') ?>">
+                                <?php endif; ?>
+                            <?php endforeach; ?>
 
                             <input
                                 type="hidden"
@@ -722,6 +729,11 @@ function paymentStatusClass($status)
                             name="order_id"
                             value="<?= $order['id'] ?>"
                         >
+                        <?php foreach (['search', 'order_status', 'payment_status'] as $paramName): ?>
+                            <?php if (isset($_GET[$paramName]) && is_string($_GET[$paramName]) && $_GET[$paramName] !== ''): ?>
+                                <input type="hidden" name="<?= htmlspecialchars($paramName, ENT_QUOTES, 'UTF-8') ?>" value="<?= htmlspecialchars(substr($_GET[$paramName], 0, 100), ENT_QUOTES, 'UTF-8') ?>">
+                            <?php endif; ?>
+                        <?php endforeach; ?>
 
 
                         <input

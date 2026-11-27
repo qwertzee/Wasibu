@@ -3,6 +3,8 @@
 session_start();
 require_once 'config/navigation.php';
 require 'config/database.php';
+require_once 'config/customer.php';
+require_once 'config/promos.php';
 
 $cartCount = array_sum($_SESSION['cart'] ?? []);
 
@@ -21,8 +23,11 @@ if (!$campaign) {
     exit('Kategori promo tidak ditemukan.');
 }
 
+$promoColumns = promoSchemaReady($pdo)
+    ? "SELECT id, title, menu_text, promo_price, active_weekdays, description, terms, image_path, sort_order, is_active, starts_at, ends_at"
+    : "SELECT id, title, menu_text, NULL AS promo_price, NULL AS active_weekdays, description, terms, image_path, sort_order, is_active, starts_at, ends_at";
 $promoStmt = $pdo->prepare("
-    SELECT title, menu_text, description, terms, image_path, sort_order
+    $promoColumns
     FROM promos
     WHERE category_id = ?
       AND is_active = 1
@@ -72,6 +77,7 @@ unset($card);
 
     <main class="promo-page">
         <div class="container">
+            <a href="index.php" class="promo-back-link"><i class="bi bi-arrow-left" aria-hidden="true"></i> Kembali ke Beranda</a>
             <div class="promo-banner">
                 <img src="<?= htmlspecialchars($campaign['banner_path'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($campaign['banner_alt'], ENT_QUOTES, 'UTF-8') ?>" fetchpriority="high">
             </div>
@@ -101,6 +107,31 @@ unset($card);
                                         <?php endforeach; ?>
                                     </ul>
                                 </div>
+                                <?php
+                                $promoReady = promoSchemaReady($pdo)
+                                    && (float) ($card['promo_price'] ?? 0) > 0
+                                    && promoAvailableNow($card);
+                                ?>
+                                <?php if ($promoReady): ?>
+                                    <form action="add-promo-to-cart.php" method="POST" class="mt-3">
+                                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(customerCsrfToken(), ENT_QUOTES, 'UTF-8') ?>">
+                                        <input type="hidden" name="promo_id" value="<?= (int) $card['id'] ?>">
+                                        <button type="submit" class="btn wasibu-btn wasibu-btn-primary promo-order-button">
+                                            <i class="bi bi-cart3" aria-hidden="true"></i>
+                                            Pesan Sekarang
+                                        </button>
+                                    </form>
+                                <?php else: ?>
+                                    <button type="button" class="btn btn-outline-secondary mt-3 promo-order-button" disabled>
+                                        <i class="bi bi-cart3" aria-hidden="true"></i>
+                                        Pemesanan Belum Tersedia
+                                    </button>
+                                    <?php if (promoSchemaReady($pdo)): ?>
+                                        <div class="small text-secondary mt-2">Promo belum dikonfigurasi atau sedang tidak berlaku.</div>
+                                    <?php else: ?>
+                                        <div class="small text-secondary mt-2">Hubungan produk dan harga promo perlu dikonfigurasi admin.</div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </article>
                     </div>

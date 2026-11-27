@@ -5,6 +5,7 @@ session_start();
 require_once 'config/navigation.php';
 require 'config/database.php';
 require_once 'config/customer.php';
+require_once 'config/promos.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !customerCsrfValidate($_POST['csrf_token'] ?? null)) {
     $_SESSION['checkout_error'] = 'Sesi checkout tidak valid. Silakan coba lagi.';
@@ -56,9 +57,10 @@ if (
 */
 
 $cart = $_SESSION['cart'] ?? [];
+$promoCart = promoSchemaReady($pdo) ? ($_SESSION['promo_cart'] ?? []) : [];
 
 
-if (empty($cart)) {
+if (empty($cart) && empty($promoCart)) {
     header('Location: cart.php');
     exit;
 }
@@ -89,23 +91,14 @@ $_SESSION['checkout'] = [
 |--------------------------------------------------------------------------
 */
 
-$productIds = array_keys($cart);
-
-$placeholders = implode(
-    ',',
-    array_fill(0, count($productIds), '?')
-);
-
-
-$stmt = $pdo->prepare("
-    SELECT *
-    FROM products
-    WHERE id IN ($placeholders)
-");
-
-$stmt->execute($productIds);
-
-$products = $stmt->fetchAll();
+$products = [];
+if (!empty($cart)) {
+    $productIds = array_keys($cart);
+    $placeholders = implode(',', array_fill(0, count($productIds), '?'));
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
+    $stmt->execute($productIds);
+    $products = $stmt->fetchAll();
+}
 
 $productById = [];
 foreach ($products as $product) {
@@ -128,6 +121,41 @@ foreach ($cart as $productId => $quantity) {
     }
 }
 
+foreach ($promoCart as $promoId => $quantity) {
+    $promoStmt = $pdo->prepare("
+        SELECT id, title, promo_price, active_weekdays, is_active, starts_at, ends_at
+        FROM promos WHERE id = ? LIMIT 1
+    ");
+    $promoStmt->execute([(int) $promoId]);
+    $promo = $promoStmt->fetch();
+    if (!$promo || (int) $quantity < 1 || (float) $promo['promo_price'] <= 0 || !promoAvailableNow($promo)) {
+        $_SESSION['checkout_error'] = 'Promo berubah atau tidak tersedia. Periksa kembali keranjang.';
+        header('Location: checkout.php');
+        exit;
+    }
+    $linkedStmt = $pdo->prepare("
+        SELECT pp.quantity, p.stock, p.is_available
+        FROM promo_products pp
+        INNER JOIN products p ON p.id = pp.product_id
+        WHERE pp.promo_id = ?
+    ");
+    $linkedStmt->execute([(int) $promoId]);
+    $linkedProducts = $linkedStmt->fetchAll();
+    if (!$linkedProducts) {
+        $_SESSION['checkout_error'] = 'Isi paket promo belum dikonfigurasi.';
+        header('Location: checkout.php');
+        exit;
+    }
+    foreach ($linkedProducts as $linkedProduct) {
+        $required = (int) $quantity * (int) $linkedProduct['quantity'];
+        if ((int) $linkedProduct['is_available'] !== 1 || $linkedProduct['stock'] === null || $required > (int) $linkedProduct['stock']) {
+            $_SESSION['checkout_error'] = 'Stok komponen promo berubah atau tidak mencukupi.';
+            header('Location: checkout.php');
+            exit;
+        }
+    }
+}
+
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +173,13 @@ foreach ($products as $product) {
         $product['base_price']
         *
         $quantity;
+}
+
+foreach ($promoCart as $promoId => $quantity) {
+    $promoStmt = $pdo->prepare("SELECT promo_price FROM promos WHERE id = ? LIMIT 1");
+    $promoStmt->execute([(int) $promoId]);
+    $promoPrice = (float) $promoStmt->fetchColumn();
+    $total += $promoPrice * (int) $quantity;
 }
 
 

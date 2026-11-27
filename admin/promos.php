@@ -5,6 +5,7 @@ session_start();
 require_once __DIR__ . '/auth.php';
 require_once '../config/navigation.php';
 require '../config/database.php';
+require_once '../config/promos.php';
 
 if (empty($_SESSION['promo_csrf_token'])) {
     $_SESSION['promo_csrf_token'] = bin2hex(random_bytes(32));
@@ -31,6 +32,8 @@ $form = [
     'category_id' => '',
     'title' => '',
     'menu_text' => '',
+    'promo_price' => '',
+    'active_weekdays' => '',
     'description' => '',
     'terms' => '',
     'image_path' => '',
@@ -39,6 +42,7 @@ $form = [
     'ends_at' => ''
 ];
 $selectedProductIds = [];
+$selectedProductQuantities = [];
 $error = '';
 $editId = isset($_GET['edit']) ? (int) $_GET['edit'] : 0;
 
@@ -58,13 +62,15 @@ if ($editId > 0) {
     }
 
     $form = $existingPromo;
-    $selectedProductStmt = $pdo->prepare("
-        SELECT product_id
-        FROM promo_products
-        WHERE promo_id = ?
-    ");
+    $selectedProductStmt = $pdo->prepare(promoSchemaReady($pdo)
+        ? "SELECT product_id, quantity FROM promo_products WHERE promo_id = ?"
+        : "SELECT product_id, 1 AS quantity FROM promo_products WHERE promo_id = ?");
     $selectedProductStmt->execute([$editId]);
-    $selectedProductIds = array_map('intval', $selectedProductStmt->fetchAll(PDO::FETCH_COLUMN));
+    foreach ($selectedProductStmt->fetchAll(PDO::FETCH_ASSOC) as $linkedProduct) {
+        $linkedProductId = (int) $linkedProduct['product_id'];
+        $selectedProductIds[] = $linkedProductId;
+        $selectedProductQuantities[$linkedProductId] = max(1, (int) ($linkedProduct['quantity'] ?? 1));
+    }
 }
 
 function promoUploadedImage(array $file): string
@@ -165,6 +171,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'category_id' => isset($_POST['category_id']) ? (int) $_POST['category_id'] : '',
                 'title' => trim($_POST['title'] ?? ''),
                 'menu_text' => trim($_POST['menu_text'] ?? ''),
+                'promo_price' => trim($_POST['promo_price'] ?? ''),
+                'active_weekdays' => trim($_POST['active_weekdays'] ?? ''),
                 'description' => trim($_POST['description'] ?? ''),
                 'terms' => trim($_POST['terms'] ?? ''),
                 'image_path' => '',
@@ -182,6 +190,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     return $productId > 0;
                 }
             )));
+            $selectedProductQuantities = [];
+            $postedQuantities = $_POST['product_quantities'] ?? [];
+            if (is_array($postedQuantities)) {
+                foreach ($selectedProductIds as $selectedProductId) {
+                    $selectedProductQuantities[$selectedProductId] = max(1, (int) ($postedQuantities[$selectedProductId] ?? 1));
+                }
+            }
 
             try {
                 if ($action === 'update' && $promoId > 0) {
@@ -211,6 +226,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 if ($form['terms'] === '') {
                     throw new RuntimeException('Syarat dan ketentuan wajib diisi.');
+                }
+                if (promoSchemaReady($pdo)) {
+                    $promoPrice = (float) str_replace(',', '.', $form['promo_price']);
+                    if ($promoPrice <= 0) {
+                        throw new RuntimeException('Harga promo harus lebih besar dari 0 setelah migrasi promo diterapkan.');
+                    }
+                    $form['promo_price'] = number_format($promoPrice, 2, '.', '');
+                    $validWeekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+                    $weekdayInput = array_filter(array_map('trim', explode(',', strtolower($form['active_weekdays']))));
+                    foreach ($weekdayInput as $weekday) {
+                        if (!in_array($weekday, $validWeekdays, true)) {
+                            throw new RuntimeException('Hari berlaku promo hanya boleh mon,tue,wed,thu,fri,sat,sun.');
+                        }
+                    }
+                    $form['active_weekdays'] = $weekdayInput ? implode(',', $weekdayInput) : null;
                 }
 
                 $startDate = promoDateValue($form['starts_at']);
@@ -247,61 +277,95 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $pdo->beginTransaction();
                 if ($action === 'create') {
-                    $saveStmt = $pdo->prepare("
-                        INSERT INTO promos
-                            (legacy_key, category_id, title, menu_text, description, terms, image_path, is_active, starts_at, ends_at, sort_order)
-                        VALUES
-                                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
-                    ");
-                    $saveStmt->execute([
-                                'admin-' . bin2hex(random_bytes(16)),
-                        (int) $form['category_id'],
-                        $form['title'],
-                        $form['menu_text'],
-                        $form['description'] !== '' ? $form['description'] : null,
-                        $form['terms'],
-                        $form['image_path'],
-                        (int) $form['is_active'],
-                        $startDate,
-                        $endDate
-                    ]);
+                    if (promoSchemaReady($pdo)) {
+                        $saveStmt = $pdo->prepare("
+                            INSERT INTO promos
+                                (legacy_key, category_id, title, menu_text, promo_price, active_weekdays, description, terms, image_path, is_active, starts_at, ends_at, sort_order)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+                        ");
+                        $saveStmt->execute([
+                            'admin-' . bin2hex(random_bytes(16)),
+                            (int) $form['category_id'],
+                            $form['title'],
+                            $form['menu_text'],
+                            $form['promo_price'],
+                            $form['active_weekdays'],
+                            $form['description'] !== '' ? $form['description'] : null,
+                            $form['terms'],
+                            $form['image_path'],
+                            (int) $form['is_active'],
+                            $startDate,
+                            $endDate
+                        ]);
+                    } else {
+                        $saveStmt = $pdo->prepare("
+                            INSERT INTO promos
+                                (legacy_key, category_id, title, menu_text, description, terms, image_path, is_active, starts_at, ends_at, sort_order)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+                        ");
+                        $saveStmt->execute([
+                            'admin-' . bin2hex(random_bytes(16)),
+                            (int) $form['category_id'],
+                            $form['title'],
+                            $form['menu_text'],
+                            $form['description'] !== '' ? $form['description'] : null,
+                            $form['terms'],
+                            $form['image_path'],
+                            (int) $form['is_active'],
+                            $startDate,
+                            $endDate
+                        ]);
+                    }
                     $promoId = (int) $pdo->lastInsertId();
                 } else {
-                    $saveStmt = $pdo->prepare("
-                        UPDATE promos
-                        SET category_id = ?,
-                            title = ?,
-                            menu_text = ?,
-                            description = ?,
-                            terms = ?,
-                            image_path = ?,
-                            is_active = ?,
-                            starts_at = ?,
-                            ends_at = ?
-                        WHERE id = ?
-                    ");
-                    $saveStmt->execute([
-                        (int) $form['category_id'],
-                        $form['title'],
-                        $form['menu_text'],
-                        $form['description'] !== '' ? $form['description'] : null,
-                        $form['terms'],
-                        $form['image_path'],
-                        (int) $form['is_active'],
-                        $startDate,
-                        $endDate,
-                        $promoId
-                    ]);
+                    if (promoSchemaReady($pdo)) {
+                        $saveStmt = $pdo->prepare("
+                            UPDATE promos
+                            SET category_id = ?, title = ?, menu_text = ?, promo_price = ?, active_weekdays = ?,
+                                description = ?, terms = ?, image_path = ?, is_active = ?, starts_at = ?, ends_at = ?
+                            WHERE id = ?
+                        ");
+                        $saveStmt->execute([
+                            (int) $form['category_id'], $form['title'], $form['menu_text'],
+                            $form['promo_price'], $form['active_weekdays'],
+                            $form['description'] !== '' ? $form['description'] : null,
+                            $form['terms'], $form['image_path'], (int) $form['is_active'],
+                            $startDate, $endDate, $promoId
+                        ]);
+                    } else {
+                        $saveStmt = $pdo->prepare("
+                            UPDATE promos
+                            SET category_id = ?, title = ?, menu_text = ?, description = ?, terms = ?,
+                                image_path = ?, is_active = ?, starts_at = ?, ends_at = ?
+                            WHERE id = ?
+                        ");
+                        $saveStmt->execute([
+                            (int) $form['category_id'], $form['title'], $form['menu_text'],
+                            $form['description'] !== '' ? $form['description'] : null,
+                            $form['terms'], $form['image_path'], (int) $form['is_active'],
+                            $startDate, $endDate, $promoId
+                        ]);
+                    }
                 }
 
                 $pdo->prepare("DELETE FROM promo_products WHERE promo_id = ?")->execute([$promoId]);
                 if ($selectedProductIds) {
-                    $linkStmt = $pdo->prepare("
-                        INSERT INTO promo_products (promo_id, product_id)
-                        VALUES (?, ?)
-                    ");
-                    foreach ($selectedProductIds as $productId) {
-                        $linkStmt->execute([$promoId, $productId]);
+                    if (promoSchemaReady($pdo)) {
+                        $linkStmt = $pdo->prepare("
+                            INSERT INTO promo_products (promo_id, product_id, quantity)
+                            VALUES (?, ?, ?)
+                        ");
+                        foreach ($selectedProductIds as $productId) {
+                            $linkStmt->execute([$promoId, $productId, $selectedProductQuantities[$productId] ?? 1]);
+                        }
+                    } else {
+                        $linkStmt = $pdo->prepare("
+                            INSERT INTO promo_products (promo_id, product_id)
+                            VALUES (?, ?)
+                        ");
+                        foreach ($selectedProductIds as $productId) {
+                            $linkStmt->execute([$promoId, $productId]);
+                        }
                     }
                 }
 
@@ -496,17 +560,42 @@ $isEditing = (int) $form['id'] > 0;
                         <label for="menu_text" class="form-label">Nama/keterangan menu</label>
                         <input id="menu_text" name="menu_text" class="form-control" maxlength="255" value="<?= htmlspecialchars($form['menu_text'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
+                    <?php if (promoSchemaReady($pdo)): ?>
+                        <div class="col-md-6">
+                            <label for="promo_price" class="form-label">Harga Promo</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input id="promo_price" type="number" name="promo_price" class="form-control" min="1" step="1" value="<?= htmlspecialchars($form['promo_price'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="active_weekdays" class="form-label">Hari berlaku (opsional)</label>
+                            <input id="active_weekdays" name="active_weekdays" class="form-control" maxlength="20" placeholder="mon,tue,wed" value="<?= htmlspecialchars($form['active_weekdays'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <div class="form-text">Kosongkan untuk berlaku setiap hari. Gunakan kode mon,tue,wed,thu,fri,sat,sun.</div>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-12">
+                            <div class="alert alert-warning mb-0">Konfigurasi pemesanan promo belum aktif. Jalankan migration SQL secara manual sebelum mengatur harga dan jumlah paket.</div>
+                        </div>
+                    <?php endif; ?>
                     <div class="col-12">
-                        <label for="product_ids" class="form-label">Hubungkan ke menu katalog (opsional)</label>
-                        <select id="product_ids" name="product_ids[]" class="form-select" multiple size="5">
+                        <label class="form-label">Hubungkan ke menu katalog dan jumlah isi paket</label>
+                        <div class="border rounded p-3">
                             <?php foreach ($products as $product): ?>
-                                <option value="<?= (int) $product['id'] ?>" <?= in_array((int) $product['id'], $selectedProductIds, true) ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?>
-                                    <?= $product['base_price'] !== null ? ' — Rp' . number_format((float) $product['base_price'], 0, ',', '.') : '' ?>
-                                </option>
+                                <?php $productId = (int) $product['id']; ?>
+                                <div class="d-flex align-items-center gap-3 py-1">
+                                    <div class="form-check flex-grow-1 mb-0">
+                                        <input class="form-check-input" type="checkbox" id="product_<?= $productId ?>" name="product_ids[]" value="<?= $productId ?>" <?= in_array($productId, $selectedProductIds, true) ? 'checked' : '' ?>>
+                                        <label class="form-check-label" for="product_<?= $productId ?>">
+                                            <?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?>
+                                            <?= $product['base_price'] !== null ? ' — Rp' . number_format((float) $product['base_price'], 0, ',', '.') : '' ?>
+                                        </label>
+                                    </div>
+                                    <input type="number" name="product_quantities[<?= $productId ?>]" class="form-control" style="width:90px" min="1" value="<?= (int) ($selectedProductQuantities[$productId] ?? 1) ?>" aria-label="Jumlah <?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?>">
+                                </div>
                             <?php endforeach; ?>
-                        </select>
-                        <div class="form-text">Pilih hanya menu yang benar-benar terkait. Tahan Ctrl untuk memilih beberapa menu.</div>
+                        </div>
+                        <div class="form-text">Centang hanya menu yang benar-benar termasuk paket, lalu isi jumlahnya.</div>
                     </div>
                     <div class="col-12">
                         <label for="description" class="form-label">Deskripsi</label>

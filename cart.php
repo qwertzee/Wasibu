@@ -5,6 +5,7 @@ session_start();
 require_once 'config/navigation.php';
 require 'config/database.php';
 require_once 'config/customer.php';
+require_once 'config/promos.php';
 
 
 /*
@@ -14,6 +15,8 @@ require_once 'config/customer.php';
 */
 
 $cart = $_SESSION['cart'] ?? [];
+$promoCart = promoSchemaReady($pdo) ? ($_SESSION['promo_cart'] ?? []) : [];
+$promoCartItems = [];
 
 $products = [];
 
@@ -58,6 +61,21 @@ if (!empty($cart)) {
 
     $products = $stmt->fetchAll();
 
+}
+
+if (!empty($promoCart)) {
+    $promoIds = array_keys($promoCart);
+    $placeholders = implode(',', array_fill(0, count($promoIds), '?'));
+    $promoStmt = $pdo->prepare("
+        SELECT id, title, menu_text, promo_price
+        FROM promos
+        WHERE id IN ($placeholders)
+          AND is_active = 1
+    ");
+    $promoStmt->execute($promoIds);
+    foreach ($promoStmt->fetchAll() as $promo) {
+        $promoCartItems[(int) $promo['id']] = $promo;
+    }
 }
 
 ?>
@@ -126,6 +144,11 @@ if (!empty($cart)) {
 
     <div class="mb-4">
 
+        <a href="daftar-menu.php" class="text-decoration-none text-secondary d-inline-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-arrow-left" aria-hidden="true"></i>
+            Kembali ke Menu
+        </a>
+
         <h2 class="fw-bold">
             Keranjang
         </h2>
@@ -140,7 +163,7 @@ if (!empty($cart)) {
             </div>
         <?php endif; ?>
 
-        <?php if (!empty($products)): ?>
+        <?php if (!empty($products) || !empty($promoCartItems)): ?>
 
             <form
                 action="cart-action.php"
@@ -166,7 +189,7 @@ if (!empty($cart)) {
 
         <?php endif; ?>
 
-        <?php if (!empty($products)): ?>
+        <?php if (!empty($products) || !empty($promoCartItems)): ?>
         <div class="card border-0 shadow-sm mb-3 cart-account-card">
             <div class="card-body p-3 p-md-4">
                 <?php if (!empty($_SESSION['customer_id'])): ?>
@@ -188,13 +211,67 @@ if (!empty($cart)) {
     </div>
 
 
-    <?php if (!empty($products)): ?>
+    <?php if (!empty($products) || !empty($promoCartItems)): ?>
 
 
         <div class="row">
 
 
             <div class="col-lg-8">
+
+                <?php foreach ($promoCartItems as $promoItem): ?>
+                    <?php
+                    $promoId = (int) $promoItem['id'];
+                    $quantity = (int) ($promoCart[$promoId] ?? 0);
+                    $subtotal = (float) $promoItem['promo_price'] * $quantity;
+                    $total += $subtotal;
+
+                    $componentStmt = $pdo->prepare("
+                        SELECT p.name, pp.quantity
+                        FROM promo_products pp
+                        INNER JOIN products p ON p.id = pp.product_id
+                        WHERE pp.promo_id = ?
+                        ORDER BY p.name
+                    ");
+                    $componentStmt->execute([$promoId]);
+                    $components = $componentStmt->fetchAll();
+                    ?>
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                            <small class="text-secondary">Paket Promo</small>
+                            <h5 class="fw-bold mb-1"><?= htmlspecialchars($promoItem['title']) ?></h5>
+                            <div class="small text-secondary mb-2">
+                                Isi paket:
+                                <?php foreach ($components as $index => $component): ?>
+                                    <?= $index ? ' + ' : '' ?><?= (int) $component['quantity'] ?>× <?= htmlspecialchars($component['name']) ?>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="fw-bold">Rp<?= number_format((float) $promoItem['promo_price'], 0, ',', '.') ?></div>
+                            <div class="d-flex align-items-center gap-2 mt-3">
+                                <form action="cart-action.php" method="POST" class="m-0">
+                                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(customerCsrfToken()) ?>">
+                                    <input type="hidden" name="promo_id" value="<?= $promoId ?>">
+                                    <input type="hidden" name="action" value="decrease_promo">
+                                    <button type="submit" class="btn btn-outline-dark cart-qty-button" <?= $quantity <= 1 ? 'disabled' : '' ?>>−</button>
+                                </form>
+                                <span class="cart-quantity"><?= $quantity ?> paket</span>
+                                <form action="cart-action.php" method="POST" class="m-0">
+                                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(customerCsrfToken()) ?>">
+                                    <input type="hidden" name="promo_id" value="<?= $promoId ?>">
+                                    <input type="hidden" name="action" value="increase_promo">
+                                    <button type="submit" class="btn btn-dark cart-qty-button">+</button>
+                                </form>
+                            </div>
+                            <div class="mt-2"><small class="text-secondary">Subtotal</small><div class="fw-semibold">Rp<?= number_format($subtotal, 0, ',', '.') ?></div></div>
+                            <form action="cart-action.php" method="POST" class="mt-3">
+                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(customerCsrfToken()) ?>">
+                                <input type="hidden" name="promo_id" value="<?= $promoId ?>">
+                                <input type="hidden" name="action" value="remove_promo">
+                                <button type="submit" class="btn btn-link text-danger p-0 text-decoration-none">Batal</button>
+                            </form>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
 
 
                 <?php foreach ($products as $product): ?>

@@ -4,6 +4,7 @@ session_start();
 
 require 'config/database.php';
 require_once 'config/customer.php';
+require_once 'config/promos.php';
 
 
 /*
@@ -35,6 +36,7 @@ $action = $_POST['action'] ?? '';
 $productId = isset($_POST['product_id'])
     ? (int) $_POST['product_id']
     : 0;
+$promoId = isset($_POST['promo_id']) ? (int) $_POST['promo_id'] : 0;
 
 
 /*
@@ -45,6 +47,39 @@ $productId = isset($_POST['product_id'])
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
+}
+
+if ($promoId > 0 && in_array($action, ['increase_promo', 'decrease_promo', 'remove_promo'], true)) {
+    if (!isset($_SESSION['promo_cart'])) {
+        $_SESSION['promo_cart'] = [];
+    }
+    $current = (int) ($_SESSION['promo_cart'][$promoId] ?? 0);
+
+    if ($action === 'increase_promo') {
+        $next = $current + 1;
+        $linkedStmt = $pdo->prepare("
+            SELECT pp.quantity, p.name, p.stock, p.is_available
+            FROM promo_products pp
+            INNER JOIN products p ON p.id = pp.product_id
+            WHERE pp.promo_id = ?
+        ");
+        $linkedStmt->execute([$promoId]);
+        foreach ($linkedStmt->fetchAll() as $linked) {
+            $required = $next * (int) $linked['quantity'];
+            if ((int) $linked['is_available'] !== 1 || $linked['stock'] === null || $required > (int) $linked['stock']) {
+                $_SESSION['cart_error'] = 'Stok komponen promo tidak mencukupi.';
+                header('Location: cart.php');
+                exit;
+            }
+        }
+        $_SESSION['promo_cart'][$promoId] = $next;
+    } elseif ($action === 'decrease_promo' && $current > 1) {
+        $_SESSION['promo_cart'][$promoId] = $current - 1;
+    } elseif ($action === 'remove_promo') {
+        unset($_SESSION['promo_cart'][$promoId]);
+    }
+    header('Location: cart.php');
+    exit;
 }
 
 
@@ -127,6 +162,7 @@ elseif ($action === 'remove') {
 elseif ($action === 'clear') {
 
     $_SESSION['cart'] = [];
+    $_SESSION['promo_cart'] = [];
 
 }
 

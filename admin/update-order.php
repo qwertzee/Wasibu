@@ -4,6 +4,7 @@ session_start();
 
 require_once __DIR__ . '/auth.php';
 require '../config/database.php';
+require_once '../config/order-stock.php';
 
 
 /*
@@ -81,27 +82,20 @@ if ($action === 'confirm_payment') {
                 throw new RuntimeException('Pesanan QRIS tidak menunggu verifikasi pembayaran.');
             }
 
+            $promoIdColumn = $pdo->query("SHOW COLUMNS FROM order_items LIKE 'promo_id'")->fetch()
+                ? 'promo_id'
+                : 'NULL AS promo_id';
             $itemsStmt = $pdo->prepare("
-                SELECT product_id, SUM(quantity) AS quantity
+                SELECT product_id, variant_id, $promoIdColumn, quantity, unit_price, subtotal
                 FROM order_items
                 WHERE order_id = ?
-                GROUP BY product_id
-                ORDER BY product_id
+                ORDER BY id
+                FOR UPDATE
             ");
             $itemsStmt->execute([$orderId]);
             $items = $itemsStmt->fetchAll();
-
-            if (!$items) {
-                throw new RuntimeException('Pesanan tidak memiliki item produk untuk diproses.');
-            }
-
-            $quantities = [];
-            foreach ($items as $item) {
-                if ($item['product_id'] === null || (int) $item['quantity'] < 1) {
-                    throw new RuntimeException('Item pesanan tidak memiliki data produk atau jumlah yang valid.');
-                }
-                $quantities[(int) $item['product_id']] = (int) $item['quantity'];
-            }
+            $stockRequirements = orderStockRequirementsFromItems($items);
+            $quantities = $stockRequirements['quantities'];
 
             $productIds = array_keys($quantities);
             $placeholders = implode(',', array_fill(0, count($productIds), '?'));
@@ -117,6 +111,29 @@ if ($action === 'confirm_payment') {
 
             if (count($products) !== count($quantities)) {
                 throw new RuntimeException('Salah satu produk pesanan tidak ditemukan.');
+            }
+
+            if ($stockRequirements['variant_product_ids']) {
+                $variantIds = array_keys($stockRequirements['variant_product_ids']);
+                $variantPlaceholders = implode(',', array_fill(0, count($variantIds), '?'));
+                $variantsStmt = $pdo->prepare("
+                    SELECT id, product_id
+                    FROM product_variants
+                    WHERE id IN ($variantPlaceholders)
+                    ORDER BY id
+                    FOR UPDATE
+                ");
+                $variantsStmt->execute($variantIds);
+                $variants = $variantsStmt->fetchAll();
+                if (count($variants) !== count($variantIds)) {
+                    throw new RuntimeException('Salah satu varian produk pesanan tidak ditemukan.');
+                }
+                foreach ($variants as $variant) {
+                    $variantId = (int) $variant['id'];
+                    if ((int) $variant['product_id'] !== $stockRequirements['variant_product_ids'][$variantId]) {
+                        throw new RuntimeException('Varian produk tidak sesuai dengan produk pesanan.');
+                    }
+                }
             }
 
             foreach ($products as $product) {
@@ -261,9 +278,12 @@ elseif ($action === 'update_status') {
 |--------------------------------------------------------------------------
 */
 
-header(
-    'Location: order-detail.php?id='
-    . $orderId
-);
+$redirectParams = ['id' => $orderId];
+foreach (['search', 'order_status', 'payment_status'] as $paramName) {
+    if (isset($_POST[$paramName]) && is_string($_POST[$paramName]) && $_POST[$paramName] !== '') {
+        $redirectParams[$paramName] = substr($_POST[$paramName], 0, 100);
+    }
+}
+header('Location: order-detail.php?' . http_build_query($redirectParams));
 
 exit;

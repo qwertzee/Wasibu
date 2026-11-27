@@ -2,6 +2,55 @@
 @import url("../vendor/bootstrap-icons/bootstrap-icons.css");
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap");
 
+.admin-orders .orders-date-group {
+    margin-bottom: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(65, 7, 9, 0.12);
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(65, 7, 9, 0.06);
+}
+
+.admin-orders .orders-date-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.admin-orders .orders-date-header {
+    min-height: 58px;
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(65, 7, 9, 0.1);
+    background: var(--brand-background);
+}
+
+.admin-orders .orders-date-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--brand-primary-dark);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.admin-orders .orders-date-title .bi {
+    color: var(--brand-primary);
+}
+
+.admin-orders .orders-date-count {
+    flex: 0 0 auto;
+    color: var(--brand-primary-dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.admin-orders .orders-date-table {
+    min-width: 1000px;
+    table-layout: fixed;
+}
+
+.admin-orders .orders-date-table th,
+.admin-orders .orders-date-table td {
+    overflow-wrap: anywhere;
+}
+
 /* =========================================================
    PALET WARNA WASIBU
    ========================================================= */
@@ -3761,6 +3810,25 @@ body {
 .promo-page {
     padding: 28px 0 72px;
     background: var(--brand-background);
+}
+
+.promo-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    color: var(--brand-primary-dark);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.promo-back-link:hover {
+    color: var(--brand-primary);
+}
+
+.promo-order-button {
+    min-height: 42px;
+    border-radius: 999px;
 }
 
 .promo-banner {

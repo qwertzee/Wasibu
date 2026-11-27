@@ -6,6 +6,8 @@ require_once __DIR__ . '/auth.php';
 require_once '../config/navigation.php';
 require '../config/database.php';
 
+date_default_timezone_set('Asia/Jakarta');
+
 $search =
     trim(
         $_GET['search'] ?? ''
@@ -98,7 +100,7 @@ if ($paymentStatus !== '') {
 
 
 $sql .= "
-    ORDER BY id DESC
+    ORDER BY created_at DESC, id DESC
 ";
 
 
@@ -109,6 +111,20 @@ $stmt->execute($params);
 
 $orders =
     $stmt->fetchAll();
+
+$orderGroups = [];
+foreach ($orders as $order) {
+    $orderDate = (new DateTimeImmutable((string) $order['created_at'], new DateTimeZone('Asia/Jakarta')))->format('Y-m-d');
+    $orderGroups[$orderDate][] = $order;
+}
+
+$today = (new DateTimeImmutable('today', new DateTimeZone('Asia/Jakarta')))->format('Y-m-d');
+$yesterday = (new DateTimeImmutable('yesterday', new DateTimeZone('Asia/Jakarta')))->format('Y-m-d');
+$monthNames = [
+    1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+    5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+    9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+];
 
 
 /*
@@ -436,48 +452,56 @@ function readableStatus($status)
             </div>
 
 
-            <div class="table-responsive">
-
-                <table
-                    class="table align-middle"
-                >
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Kode</th>
-
-                            <th>Customer</th>
-
-                            <th>HP</th>
-
-                            <th>Total</th>
-
-                            <th>Metode</th>
-
-                            <th>Pesanan</th>
-
-                            <th>Pembayaran</th>
-
-                            <th>Waktu</th>
-
-                            <th>Aksi</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-
-                    <?php foreach (
-                        $orders as $order
-                    ): ?>
-
-
-                        <tr>
+            <?php foreach ($orderGroups as $groupDate => $groupOrders): ?>
+                <?php
+                $groupDateObject = new DateTimeImmutable($groupDate, new DateTimeZone('Asia/Jakarta'));
+                $formattedGroupDate = $groupDateObject->format('j') . ' ' . $monthNames[(int) $groupDateObject->format('n')] . ' ' . $groupDateObject->format('Y');
+                if ($groupDate === $today) {
+                    $groupLabel = 'Hari Ini — ' . $formattedGroupDate;
+                } elseif ($groupDate === $yesterday) {
+                    $groupLabel = 'Kemarin — ' . $formattedGroupDate;
+                } else {
+                    $groupLabel = $formattedGroupDate;
+                }
+                ?>
+                <section class="card orders-date-group" aria-label="<?= htmlspecialchars($groupLabel, ENT_QUOTES, 'UTF-8') ?>">
+                    <header class="orders-date-header d-flex justify-content-between align-items-center gap-3">
+                        <h3 class="orders-date-title mb-0">
+                            <i class="bi bi-calendar3" aria-hidden="true"></i>
+                            <?= htmlspecialchars($groupLabel, ENT_QUOTES, 'UTF-8') ?>
+                        </h3>
+                        <span class="orders-date-count"><?= count($groupOrders) ?> pesanan</span>
+                    </header>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-middle orders-date-table mb-0">
+                                <colgroup>
+                                    <col style="width: 15%">
+                                    <col style="width: 13%">
+                                    <col style="width: 10%">
+                                    <col style="width: 10%">
+                                    <col style="width: 10%">
+                                    <col style="width: 11%">
+                                    <col style="width: 12%">
+                                    <col style="width: 11%">
+                                    <col style="width: 8%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Customer</th>
+                                        <th>HP</th>
+                                        <th>Total</th>
+                                        <th>Metode</th>
+                                        <th>Pesanan</th>
+                                        <th>Pembayaran</th>
+                                        <th>Waktu</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($groupOrders as $order): ?>
+                                    <tr>
 
 
                             <td>
@@ -578,7 +602,11 @@ function readableStatus($status)
                             <td>
 
                                 <a
-                                    href="order-detail.php?id=<?= $order['id'] ?>"
+                                    href="order-detail.php?<?= htmlspecialchars(http_build_query(array_merge(['id' => $order['id']], array_filter([
+                                        'search' => $search,
+                                        'order_status' => $orderStatus,
+                                        'payment_status' => $paymentStatus
+                                    ], static fn($value) => $value !== ''))), ENT_QUOTES, 'UTF-8') ?>"
                                     class="btn btn-sm btn-dark rounded-pill"
                                 >
                                     Detail
@@ -587,41 +615,23 @@ function readableStatus($status)
                             </td>
 
 
-                        </tr>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            <?php endforeach; ?>
 
-
-                    <?php endforeach; ?>
-
-
-                    <?php if (
-                        empty($orders)
-                    ): ?>
-
-                        <tr>
-
-                            <td
-                                colspan="9"
-                                class="text-center text-secondary py-5"
-                            >
-                                Pesanan tidak ditemukan.
-                            </td>
-
-                        </tr>
-
-                    <?php endif; ?>
-
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
+            <?php if (empty($orders)): ?>
+                <div class="text-center text-secondary py-5">
+                    Pesanan tidak ditemukan.
+                </div>
+            <?php endif; ?>
 
         </div>
-
     </div>
-
 
 </main>
 
